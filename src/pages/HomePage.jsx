@@ -48,7 +48,7 @@ export default function HomePage() {
           >
             <Sparkles size={14} style={{ color: '#818cf8' }} />
             <span style={{ fontSize: '0.8125rem', fontWeight: '600', color: '#4338ca' }}>
-              The Independent AI Discovery & Comparison Engine
+              Independent AI Tool Discovery and Comparison
             </span>
           </div>
 
@@ -64,7 +64,7 @@ export default function HomePage() {
               color: '#ffffff'
             }}
           >
-            Find the Exact AI Tool for Your <span className="text-gradient">Next Breakthrough</span>
+            Find the Right AI Tool for <span className="text-gradient">Your Next Task</span>
           </h1>
 
           {/* Subheadline */}
@@ -77,7 +77,7 @@ export default function HomePage() {
               lineHeight: '1.6'
             }}
           >
-            Discover, benchmark, and choose from hundreds of verified AI tools. Compare side-by-side matrices, read uncompromised editorial reviews, and assemble your workflow.
+            Browse AI tools by task, category, features and pricing. Compare practical options, understand their limitations and build a workflow that fits your needs.
           </p>
 
           {/* Search Bar / Matchmaker Input */}

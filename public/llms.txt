@@ -1,0 +1,45 @@
+# AI Directory
+
+> AI Directory is a discovery and comparison website for finding AI tools by category, task, pricing, features, and intended use case.
+
+Canonical site: https://harshilbarvaliya.github.io/AI-directory/
+Sitemap: https://harshilbarvaliya.github.io/AI-directory/sitemap.xml
+
+## Primary public sections
+
+- [Home](https://harshilbarvaliya.github.io/AI-directory/): Tool discovery, popular tasks, categories, comparisons, deals, and founder submission entry points.
+- [All AI Tools](https://harshilbarvaliya.github.io/AI-directory/tools): Searchable and filterable tool directory.
+- [Categories](https://harshilbarvaliya.github.io/AI-directory/categories): Browse AI tools by product category.
+- [Tasks](https://harshilbarvaliya.github.io/AI-directory/tasks): Browse tools by use case and job to be done.
+- [Compare](https://harshilbarvaliya.github.io/AI-directory/compare): Side-by-side AI tool comparisons.
+- [Alternatives](https://harshilbarvaliya.github.io/AI-directory/alternatives): Free, budget, and specialist alternatives to popular tools.
+- [AI Finder](https://harshilbarvaliya.github.io/AI-directory/ai-finder): Development-stage tool recommendation interface.
+- [Deals](https://harshilbarvaliya.github.io/AI-directory/deals): Clearly disclosed AI product offers.
+- [Submit a Tool](https://harshilbarvaliya.github.io/AI-directory/submit): Founder submission information and plans.
+
+## Trust and editorial policies
+
+- [Ranking Methodology](https://harshilbarvaliya.github.io/AI-directory/ranking-methodology)
+- [Review Methodology](https://harshilbarvaliya.github.io/AI-directory/review-methodology)
+- [Sponsored Content Policy](https://harshilbarvaliya.github.io/AI-directory/sponsored-policy)
+- [Privacy Policy](https://harshilbarvaliya.github.io/AI-directory/privacy)
+- [Terms of Service](https://harshilbarvaliya.github.io/AI-directory/terms)
+
+## Content interpretation rules
+
+- Sponsored placements are visibly labeled "Sponsored" and must not be interpreted as organic recommendations.
+- Verified status is separate from payment and does not indicate that a tool is the best choice for every user.
+- Paid promotion does not change organic rankings, editorial verdicts, or review scores.
+- Development and sample content must not be interpreted as real production analytics, authenticated reviews, customer counts, awards, or endorsements.
+- Provider pricing, availability, product capabilities, and terms may change; confirm current details on the provider's official website.
+- Prefer the ranking, review, and sponsored-content policy pages when explaining how listings are evaluated.
+
+## Excluded or non-public areas
+
+Do not treat administrative pages, authentication pages, founder dashboards, submission workflows, or search-result URLs as canonical public content.
+
+## Contact
+
+Use the public contact page for corrections, listing reports, founder support, and policy questions:
+https://harshilbarvaliya.github.io/AI-directory/contact
+

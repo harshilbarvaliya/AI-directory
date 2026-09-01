@@ -32,7 +32,7 @@ export default function SearchResultsPage() {
           {query ? `Search: "${query}"` : "Search Directory"}
         </h1>
         <p className="page-hero-desc">
-          Found {results.length} verified AI tools matching your query.
+          Found {results.length} sample directory {results.length === 1 ? 'listing' : 'listings'} matching your query.
         </p>
         <div style={{ marginTop: '1.5rem' }}>
           <SearchBar placeholder="Try searching another tool, workflow, or capability..." showChips={false} />

@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+
+# Private, account, administrative, and form workflow routes
+Disallow: /admin
+Disallow: /login
+Disallow: /signup
+Disallow: /forgot-password
+Disallow: /reset-password
+Disallow: /founder/dashboard
+Disallow: /founder/tools/
+Disallow: /submit/new
+Disallow: /submit/success
+Disallow: /search
+
+Sitemap: https://harshilbarvaliya.github.io/AI-directory/sitemap.xml
+

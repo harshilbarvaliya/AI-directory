@@ -13,7 +13,7 @@ export default function CompareHubPage() {
         </div>
         <h1 className="page-hero-title">Compare AI Tools</h1>
         <p className="page-hero-desc">
-          Unbiased side-by-side feature comparisons, pricing breakdowns, benchmark scores, and ideal use cases.
+          Compare AI tools side by side across features, pricing, strengths, limitations and ideal use cases.
         </p>
       </div>
 
