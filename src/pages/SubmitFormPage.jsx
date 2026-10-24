@@ -430,10 +430,10 @@ export default function SubmitFormPage() {
             
             <div style={{ padding: '1.25rem', borderRadius: '14px', background: 'rgba(255, 255, 255, 0.03)', border: '1px solid rgba(255, 255, 255, 0.08)', marginBottom: '1.5rem' }}>
               <div style={{ fontSize: '0.875rem', color: '#cbd5e1', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                <div><strong>Tool Name:</strong> {formData.toolName || '—'}</div>
-                <div><strong>Website:</strong> {formData.websiteUrl || '—'}</div>
+                <div><strong>Tool Name:</strong> {formData.toolName || 'Not provided'}</div>
+                <div><strong>Website:</strong> {formData.websiteUrl || 'Not provided'}</div>
                 <div><strong>Category:</strong> {formData.primaryCategory}</div>
-                <div><strong>Pricing:</strong> {formData.pricingModel} ({formData.startingPrice || '—'})</div>
+                <div><strong>Pricing:</strong> {formData.pricingModel} ({formData.startingPrice || 'Not provided'})</div>
                 <div><strong>Selected Plan:</strong> {formData.selectedPlan}</div>
               </div>
             </div>

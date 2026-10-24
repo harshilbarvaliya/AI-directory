@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { 
   Sparkles, ChevronDown, PlusCircle, User, Menu, X, 
   Layers, GitCompare, Zap, Flame, Award, Tag, Rocket, 
-  Search, ShieldCheck, ArrowRight 
+  Search, ShieldCheck, ArrowRight, Sun, Moon
 } from 'lucide-react';
 import Button from '../common/Button';
 
@@ -12,7 +12,14 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [discoverDropdown, setDiscoverDropdown] = useState(false);
   const [compareDropdown, setCompareDropdown] = useState(false);
+  const [theme, setTheme] = useState(() => document.documentElement.dataset.theme || 'light');
   const location = useLocation();
+
+  const setActiveTheme = (nextTheme) => {
+    setTheme(nextTheme);
+    document.documentElement.dataset.theme = nextTheme;
+    localStorage.setItem('ai-directory-theme', nextTheme);
+  };
 
   // Close menus on route change
   useEffect(() => {
@@ -49,6 +56,7 @@ export default function Header() {
         {/* Brand Logo */}
         <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '0.625rem', textDecoration: 'none' }}>
           <div
+            className="brand-mark"
             style={{
               width: '38px',
               height: '38px',
@@ -266,6 +274,15 @@ export default function Header() {
 
         {/* Action CTAs */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+          <div className="theme-switch" aria-label="Website color theme">
+            <button type="button" className={theme === 'light' ? 'active' : ''} onClick={() => setActiveTheme('light')} aria-label="Use light mode" title="Light mode">
+              <Sun size={16} /><span>Light</span>
+            </button>
+            <button type="button" className={theme === 'dark' ? 'active' : ''} onClick={() => setActiveTheme('dark')} aria-label="Use dark mode" title="Dark mode">
+              <Moon size={16} /><span>Dark</span>
+            </button>
+          </div>
+
           <Link
             to="/login"
             className="btn btn-ghost btn-sm"
@@ -328,6 +345,13 @@ export default function Header() {
           <Link to="/launches" style={mobileNavLinkStyle}>New AI Launches</Link>
           <Link to="/reviews" style={mobileNavLinkStyle}>Editorial Reviews</Link>
           <Link to="/pricing" style={mobileNavLinkStyle}>Founder Pricing & Listing</Link>
+          <div className="mobile-theme-switch">
+            <span>Appearance</span>
+            <div className="theme-switch">
+              <button type="button" className={theme === 'light' ? 'active' : ''} onClick={() => setActiveTheme('light')}><Sun size={16} /> Light</button>
+              <button type="button" className={theme === 'dark' ? 'active' : ''} onClick={() => setActiveTheme('dark')}><Moon size={16} /> Dark</button>
+            </div>
+          </div>
           <div style={{ height: '1px', background: 'rgba(255, 255, 255, 0.08)', margin: '0.5rem 0' }} />
           <div style={{ display: 'flex', gap: '0.75rem' }}>
             <Button to="/submit" variant="primary" style={{ flex: 1 }}>Submit Tool</Button>

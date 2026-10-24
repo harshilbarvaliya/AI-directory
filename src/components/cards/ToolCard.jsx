@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Star, ExternalLink, Bookmark, Check, ArrowUpRight } from 'lucide-react';
 import Badge from '../common/Badge';
 
-export default function ToolCard({ tool, featured = false }) {
+export default function ToolCard({ tool, featured = false, compact = false }) {
   const [saved, setSaved] = useState(false);
 
   const toggleSave = (e) => {
@@ -14,12 +14,12 @@ export default function ToolCard({ tool, featured = false }) {
 
   return (
     <div
-      className={`glass-card ${tool.sponsored ? 'glass-card-glow' : ''}`}
+      className={`glass-card tool-card ${compact ? 'tool-card-compact' : ''} ${tool.sponsored ? 'glass-card-glow' : ''}`}
       style={{
         display: 'flex',
         flexDirection: 'column',
         height: '100%',
-        padding: '1.25rem',
+        padding: compact ? '1rem' : '1.25rem',
         borderRadius: '16px',
         border: tool.sponsored ? '1px solid rgba(245, 158, 11, 0.25)' : undefined
       }}
@@ -64,7 +64,8 @@ export default function ToolCard({ tool, featured = false }) {
           </div>
         </Link>
 
-        <button
+        {!compact && <button
+          className="tool-save-button"
           type="button"
           onClick={toggleSave}
           title={saved ? "Remove from saved" : "Save tool"}
@@ -84,7 +85,7 @@ export default function ToolCard({ tool, featured = false }) {
           }}
         >
           <Bookmark size={15} fill={saved ? 'currentColor' : 'none'} />
-        </button>
+        </button>}
       </div>
 
       {/* Tagline */}
@@ -95,7 +96,7 @@ export default function ToolCard({ tool, featured = false }) {
           lineHeight: '1.5',
           marginBottom: '1rem',
           display: '-webkit-box',
-          WebkitLineClamp: 2,
+          WebkitLineClamp: compact ? 1 : 2,
           WebkitBoxOrient: 'vertical',
           overflow: 'hidden',
           flex: '0 0 auto'
@@ -105,7 +106,7 @@ export default function ToolCard({ tool, featured = false }) {
       </p>
 
       {/* Key Feature Bullets */}
-      {tool.features && (
+      {!compact && tool.features && (
         <div style={{ marginBottom: '1.25rem', flex: 1 }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
             {tool.features.slice(0, 2).map((feat, idx) => (
@@ -152,7 +153,7 @@ export default function ToolCard({ tool, featured = false }) {
           >
             Details
           </Link>
-          <a
+          {!compact && <a
             href={tool.websiteUrl}
             target="_blank"
             rel="noopener noreferrer"
@@ -162,7 +163,7 @@ export default function ToolCard({ tool, featured = false }) {
           >
             <span>Visit</span>
             <ArrowUpRight size={13} />
-          </a>
+          </a>}
         </div>
       </div>
     </div>

@@ -16,7 +16,7 @@ export default function RefundPolicyPage() {
         <p>If a submitted tool fails our security, safety, or quality audit prior to publishing, any paid listing fees will be refunded immediately.</p>
 
         <h2 style={{ color: '#ffffff', fontSize: '1.25rem' }}>3. How to Request a Refund</h2>
-        <p>Contact support@aidirectory.example with your invoice ID and submission URL. Refunds are processed back to the original payment method within 3–5 business days.</p>
+        <p>Contact support@aidirectory.example with your invoice ID and submission URL. Refunds are processed back to the original payment method within 3 to 5 business days.</p>
       </div>
     </div>
   );

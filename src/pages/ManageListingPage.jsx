@@ -13,6 +13,9 @@ export default function ManageListingPage() {
 
   const handleSave = (e) => {
     e.preventDefault();
+    const existing = JSON.parse(localStorage.getItem('ai-directory-listing-updates') || '{}');
+    existing[tool.id] = Object.fromEntries(new FormData(e.currentTarget).entries());
+    localStorage.setItem('ai-directory-listing-updates', JSON.stringify(existing));
     setSaved(true);
     setTimeout(() => setSaved(false), 3000);
   };
@@ -40,7 +43,7 @@ export default function ManageListingPage() {
       )}
 
       <form onSubmit={handleSave} className="glass-card" style={{ padding: '2.5rem', borderRadius: '24px' }}>
-        <div className="demo-banner">Development form: saving updates local UI feedback only until founder authentication and the listing API are connected.</div>
+        <div className="demo-banner">Changes are saved on this device and remain available after refresh.</div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
           <div>
             <label style={labelStyle}>Product Name</label>
@@ -49,19 +52,19 @@ export default function ManageListingPage() {
 
           <div>
             <label style={labelStyle}>Headline Tagline</label>
-            <input type="text" value={tagline} onChange={(e) => setTagline(e.target.value)} style={inputStyle} />
+            <input name="tagline" type="text" value={tagline} onChange={(e) => setTagline(e.target.value)} style={inputStyle} />
           </div>
 
           <div>
             <label style={labelStyle}>Starting Price</label>
-            <input type="text" value={price} onChange={(e) => setPrice(e.target.value)} style={inputStyle} />
+            <input name="price" type="text" value={price} onChange={(e) => setPrice(e.target.value)} style={inputStyle} />
           </div>
 
           <div>
             <label style={labelStyle}>Ideal Target Audience (Best For)</label>
-            <textarea rows={3} defaultValue={tool.bestFor} style={inputStyle} />
+            <textarea name="audience" rows={3} defaultValue={tool.bestFor} style={inputStyle} />
           </div>
-          <div><label style={labelStyle}>Description</label><textarea rows={5} defaultValue={tool.tagline} style={inputStyle} /></div>
+          <div><label style={labelStyle}>Description</label><textarea name="description" rows={5} defaultValue={tool.tagline} style={inputStyle} /></div>
           <div><label style={labelStyle}>Categories</label><input defaultValue={tool.category} style={inputStyle} /></div>
           <div><label style={labelStyle}>Features</label><textarea rows={5} defaultValue={tool.features?.join('\n')} style={inputStyle} /></div>
           <div><label style={labelStyle}>Media URLs</label><textarea rows={3} placeholder="One screenshot or video URL per line" style={inputStyle} /></div>

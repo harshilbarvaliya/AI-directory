@@ -71,7 +71,7 @@ export default function CategoryDetailPage() {
         <div className="simple-panel"><h3>Compare options</h3><p>Review pricing, core features, and ideal users side by side.</p><Link className="btn btn-secondary btn-sm" to="/compare">View comparisons</Link></div>
         <div className="simple-panel"><h3>Alternatives</h3><p>Explore lower-cost, free, and specialist options.</p><Link className="btn btn-secondary btn-sm" to="/alternatives">Find alternatives</Link></div>
       </div></section>
-      <section className="content-section"><h2>Frequently asked questions</h2><div className="simple-grid"><div className="simple-panel"><h3>How are tools ordered?</h3><p>Organic relevance, listing completeness, freshness, and transparent editorial signals—not payment.</p></div><div className="simple-panel"><h3>Are all tools verified?</h3><p>No. Verification appears only when ownership and listing details have been checked.</p></div></div></section>
+      <section className="content-section"><h2>Frequently asked questions</h2><div className="simple-grid"><div className="simple-panel"><h3>How are tools ordered?</h3><p>Tools are ordered by relevance, listing completeness, freshness and editorial signals. Payment does not affect organic ranking.</p></div><div className="simple-panel"><h3>Are all tools verified?</h3><p>No. Verification appears only when ownership and listing details have been checked.</p></div></div></section>
       <section className="content-section"><h2>Related categories</h2><div style={{display:'flex',gap:'.5rem',flexWrap:'wrap'}}>{categories.filter(c=>c.id!==category.id).slice(0,4).map(c=><Link className="btn btn-secondary btn-sm" to={`/category/${c.slug}`} key={c.id}>{c.name}</Link>)}</div></section>
     </div>
   );

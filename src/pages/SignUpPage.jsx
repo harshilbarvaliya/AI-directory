@@ -1,10 +1,22 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { User, Mail, Lock, Sparkles, ArrowRight, CheckCircle2 } from 'lucide-react';
 import Button from '../components/common/Button';
 
 export default function SignUpPage() {
   const [role, setRole] = useState('user');
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
+  const createAccount = (event) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    const password = data.get('password');
+    if (password.length < 6) return setError('Password must contain at least 6 characters.');
+    const account = { name: data.get('name'), email: data.get('email').toLowerCase(), password, role };
+    localStorage.setItem('ai-directory-account', JSON.stringify(account));
+    localStorage.setItem('ai-directory-session', JSON.stringify({ name: account.name, email: account.email, role }));
+    navigate(role === 'founder' ? '/founder/dashboard' : '/tools');
+  };
 
   return (
     <div className="page-wrapper container" style={{ maxWidth: '480px', paddingTop: '3rem' }}>
@@ -53,18 +65,19 @@ export default function SignUpPage() {
           </button>
         </div>
 
-        <form onSubmit={(e) => { e.preventDefault(); }} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+        <form onSubmit={createAccount} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+          {error && <p role="alert" style={{color:'#fda4af',fontSize:'.8rem'}}>{error}</p>}
           <div>
             <label style={{ fontSize: '0.8125rem', color: '#cbd5e1', display: 'block', marginBottom: '0.35rem' }}>Full Name</label>
-            <input type="text" required placeholder="Alex Mercer" style={inputStyle} />
+            <input name="name" type="text" required placeholder="Alex Mercer" style={inputStyle} />
           </div>
           <div>
             <label style={{ fontSize: '0.8125rem', color: '#cbd5e1', display: 'block', marginBottom: '0.35rem' }}>Email Address</label>
-            <input type="email" required placeholder="alex@company.com" style={inputStyle} />
+            <input name="email" type="email" required placeholder="alex@company.com" style={inputStyle} />
           </div>
           <div>
             <label style={{ fontSize: '0.8125rem', color: '#cbd5e1', display: 'block', marginBottom: '0.35rem' }}>Password</label>
-            <input type="password" required placeholder="••••••••" style={inputStyle} />
+            <input name="password" type="password" minLength={6} required placeholder="••••••••" style={inputStyle} />
           </div>
 
           <Button type="submit" variant="primary" size="lg" style={{ width: '100%', marginTop: '0.5rem' }}>

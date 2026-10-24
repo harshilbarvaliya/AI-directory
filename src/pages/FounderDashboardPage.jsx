@@ -24,7 +24,7 @@ export default function FounderDashboardPage() {
         </Button>
       </div>
 
-      <section className="content-section"><h2>Performance detail</h2><div className="simple-grid"><div className="simple-panel"><h3>Recommendation appearances</h3><p>Demo: 126</p></div><div className="simple-panel"><h3>Comparison appearances</h3><p>Demo: 84</p></div><div className="simple-panel"><h3>Leads</h3><p>Demo: 7</p></div><div className="simple-panel"><h3>Traffic sources</h3><p>Demo: Search, category pages, comparisons</p></div><div className="simple-panel"><h3>Search terms</h3><p>Demo: AI code editor, research assistant</p></div><div className="simple-panel"><h3>Plan status</h3><p>Development preview — no active billing connection.</p></div></div></section>
+      <section className="content-section"><h2>Performance detail</h2><div className="simple-grid"><div className="simple-panel"><h3>Recommendation appearances</h3><p>Demo: 126</p></div><div className="simple-panel"><h3>Comparison appearances</h3><p>Demo: 84</p></div><div className="simple-panel"><h3>Leads</h3><p>Demo: 7</p></div><div className="simple-panel"><h3>Traffic sources</h3><p>Demo: Search, category pages, comparisons</p></div><div className="simple-panel"><h3>Search terms</h3><p>Demo: AI code editor, research assistant</p></div><div className="simple-panel"><h3>Plan status</h3><p>Development preview. No active billing connection.</p></div></div></section>
 
       {/* Metrics Cards */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1.25rem', marginBottom: '2.5rem' }}>

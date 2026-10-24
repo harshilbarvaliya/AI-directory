@@ -7,6 +7,14 @@ import { tools } from '../data/mockData';
 export default function AiFinderPage() {
   const [role, setRole] = useState('developer');
   const [budget, setBudget] = useState('freemium');
+  const [generated, setGenerated] = useState(false);
+  const roleCategories = { developer: ['coding-dev'], marketer: ['content-writing', 'marketing-seo'], creator: ['image-design', 'video-voice', 'audio-music'], founder: ['productivity-search', 'customer-support', 'marketing-seo'] };
+  const matches = tools.filter(tool => {
+    const roleMatch = roleCategories[role]?.includes(tool.categorySlug);
+    const budgetMatch = budget === 'free' ? ['Free', 'Freemium'].includes(tool.pricingType) : budget === 'paid' ? tool.pricingType === 'Paid' : ['Free', 'Freemium'].includes(tool.pricingType);
+    return roleMatch && budgetMatch;
+  });
+  const recommendations = (matches.length ? matches : tools.filter(tool => roleCategories[role]?.includes(tool.categorySlug))).slice(0, 3);
 
   return (
     <div className="page-wrapper container">
@@ -98,7 +106,7 @@ export default function AiFinderPage() {
         </div>
 
         <div style={{ textAlign: 'center' }}>
-          <Button variant="primary" size="lg" icon={Sparkles} iconPosition="left" style={{ width: '100%' }}>
+          <Button onClick={() => setGenerated(true)} variant="primary" size="lg" icon={Sparkles} iconPosition="left" style={{ width: '100%' }}>
             Generate Recommended Stack
           </Button>
         </div>
@@ -107,12 +115,12 @@ export default function AiFinderPage() {
       {/* Suggested Matches */}
       <div className="section-header">
         <h2 className="section-title" style={{ fontSize: '1.75rem' }}>
-          Curated Suggestions for Your Profile
+          {generated ? 'Your Recommended AI Stack' : 'Choose your profile to generate matches'}
         </h2>
       </div>
 
       <div className="grid-tools">
-        {tools.slice(0, 3).map(tool => (
+        {(generated ? recommendations : tools.slice(0, 3)).map(tool => (
           <ToolCard key={tool.id} tool={tool} />
         ))}
       </div>

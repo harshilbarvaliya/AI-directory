@@ -51,6 +51,7 @@ export default function CategoryCard({ category }) {
         </div>
 
         <span
+          className="category-count-badge"
           style={{
             fontSize: '0.75rem',
             fontWeight: '600',

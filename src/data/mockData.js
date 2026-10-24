@@ -1,4 +1,4 @@
-// AI Directory — Structured Mock Data based on AI_Directory_Complete_Website_Plan.xlsx
+// AI Directory structured sample data based on AI_Directory_Complete_Website_Plan.xlsx
 
 export const categories = [
   {
@@ -208,7 +208,7 @@ export const tools = [
   {
     id: "elevenlabs",
     name: "ElevenLabs",
-    tagline: "Prime Voice AI — Natural voice cloning and text-to-speech engine",
+    tagline: "Natural voice cloning and text-to-speech software",
     slug: "elevenlabs",
     category: "Video & Voice AI",
     categorySlug: "video-voice",
@@ -324,7 +324,7 @@ export const tools = [
   {
     id: "flux-ai",
     name: "Flux.1 by Black Forest Labs",
-    tagline: "Next-gen open-weight image model with unprecedented prompt adherence & typography",
+    tagline: "Open-weight image model with strong prompt adherence and typography",
     slug: "flux-1",
     category: "Image & Graphic Design",
     categorySlug: "image-design",
@@ -433,7 +433,7 @@ export const tools = [
       "Custom Lip Sync and audio generation",
       "Ultra-detailed lighting and motion"
     ],
-    bestFor: "Filmmakers, VFX artists, and cutting-edge creative advertising agencies",
+    bestFor: "Filmmakers, VFX artists, and creative advertising teams",
     notIdealFor: "Simple screen recording edits",
     websiteUrl: "https://runwayml.com"
   }
@@ -589,14 +589,14 @@ export const founderPricingPlans = [
     ],
     cta: "Scale with Growth",
     popular: false,
-    badge: "High ROI"
+    badge: "Growth"
   },
   {
     id: "launch-max",
     name: "Launch Max",
     price: "₹24,999+",
-    period: "Multi-channel blitz",
-    description: "Comprehensive product launch blitz with custom demo video review and newsletter top spot.",
+    period: "Multi-channel campaign",
+    description: "Product launch campaign with a custom demo review and newsletter placement.",
     features: [
       "Everything in Growth Package",
       "Exclusive Category Top Sponsor banner for 30 days",
@@ -606,7 +606,7 @@ export const founderPricingPlans = [
     ],
     cta: "Contact Launch Team",
     popular: false,
-    badge: "Maximum Reach"
+    badge: "Custom"
   },
   {
     id: "founder-pro-monthly",
