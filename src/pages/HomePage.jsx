@@ -1,9 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import {
   ArrowRight, BadgeCheck, BriefcaseBusiness, Camera,
-  CheckCircle2, CircleHelp, ClipboardCheck, Code2,
-  GraduationCap, LayoutGrid, Mail, Megaphone, Palette,
+  CircleHelp, ClipboardCheck, Code2,
+  GraduationCap, LayoutGrid, Megaphone, Palette,
   ShieldCheck, Sparkles, Target, Users, WandSparkles
 } from 'lucide-react';
 import TaskCard from '../components/cards/TaskCard';
@@ -12,7 +12,6 @@ import { tools, categories, tasks, comparisons } from '../data/mockData';
 
 export default function HomePage() {
   const heroRef = useRef(null);
-  const [subscribed, setSubscribed] = useState(false);
   const popularTools = tools.slice(0, 8);
   const latestTools = tools.filter(tool => tool.new).slice(0, 4);
   const marqueeTools = tools.filter(tool => !['jasper', 'canva-magic-studio'].includes(tool.id));
@@ -395,22 +394,6 @@ export default function HomePage() {
             <details><summary>How often are listings updated?</summary><p>Listings are reviewed as product information changes. Recently added and updated products are surfaced separately for easier discovery.</p></details>
             <details><summary>How do I submit a tool?</summary><p>Use the submission form. A standard listing can be submitted without a listing fee.</p></details>
           </div>
-        </div>
-      </section>
-
-      <section className="section directory-section">
-        <div className="container newsletter-panel">
-          <div><span><Mail size={15} /> WEEKLY AI DIRECTORY UPDATE</span><h2>Useful AI tools, without the noise.</h2><p>Get newly reviewed tools, independent comparisons and practical workflows in one concise email.</p></div>
-          {subscribed ? (
-            <div className="subscribe-success"><CheckCircle2 size={20} /> You are on the preview list.</div>
-          ) : (
-            <form onSubmit={event => { event.preventDefault(); setSubscribed(true); }}>
-              <label className="sr-only" htmlFor="home-newsletter-email">Email address</label>
-              <input id="home-newsletter-email" type="email" required placeholder="you@company.com" />
-              <button type="submit">Join free <ArrowRight size={16} /></button>
-              <small>Development preview - no email is sent yet. No spam or paid ranking updates.</small>
-            </form>
-          )}
         </div>
       </section>
 
