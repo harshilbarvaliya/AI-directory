@@ -4,6 +4,14 @@ import { tools, categories, tasks, comparisons } from '../../data/mockData';
 
 const SITE_URL = 'https://harshilbarvaliya.github.io/AI-directory';
 const absolute = (path = '/') => `${SITE_URL}${path === '/' ? '/' : path}`;
+const homeFaq = [
+  ['What is an AI tools directory?', 'An AI tools directory organizes software by task, category, pricing and use case so people can discover and compare relevant products in one place.'],
+  ['How are tools organized?', 'Tools are grouped by category, task, pricing and listing relevance. Dedicated pages help users compare products for a specific workflow.'],
+  ['Does payment improve organic ranking?', 'No. Sponsored placements are labeled and kept separate from organic listings.'],
+  ['Can I find free tools?', 'Yes. Use the Free Tools page or pricing filters to find free and freemium products.'],
+  ['How often are listings updated?', 'Listings are reviewed as product information changes. Recently added and updated products are surfaced separately for easier discovery.'],
+  ['How do I submit a tool?', 'Use the submission form. A standard listing can be submitted without a listing fee.']
+];
 
 function breadcrumbSchema(pathname, currentName) {
   const parts = pathname.split('/').filter(Boolean);
@@ -46,7 +54,20 @@ export default function StructuredData() {
     if (pathname === '/') {
       graph.push(
         { '@type': 'Organization', '@id': `${SITE_URL}/#organization`, name: 'AI Directory', url: absolute('/'), description: 'An independent directory for discovering and comparing AI tools.' },
-        { '@type': 'WebSite', '@id': `${SITE_URL}/#website`, name: 'AI Directory', url: absolute('/'), publisher: { '@id': `${SITE_URL}/#organization` }, inLanguage: 'en' }
+        { '@type': 'WebSite', '@id': `${SITE_URL}/#website`, name: 'AI Directory', url: absolute('/'), publisher: { '@id': `${SITE_URL}/#organization` }, inLanguage: 'en' },
+        {
+          '@type': 'ItemList',
+          name: 'Featured AI tools',
+          numberOfItems: tools.filter(tool => tool.featured).slice(0, 6).length,
+          itemListElement: tools.filter(tool => tool.featured).slice(0, 6).map((tool, index) => ({
+            '@type': 'ListItem', position: index + 1,
+            item: { '@type': 'SoftwareApplication', name: tool.name, url: absolute(`/tool/${tool.slug}`), applicationCategory: tool.category }
+          }))
+        },
+        {
+          '@type': 'FAQPage',
+          mainEntity: homeFaq.map(([name, text]) => ({ '@type': 'Question', name, acceptedAnswer: { '@type': 'Answer', text } }))
+        }
       );
       currentName = 'AI Directory';
     } else if (pathname === '/tools') {
