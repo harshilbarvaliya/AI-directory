@@ -263,7 +263,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="section directory-section">
+      <section className="section directory-section home-tasks-section">
         <div className="container home-finder-panel">
           <div className="home-finder-copy">
             <span className="directory-eyebrow"><WandSparkles size={14} /> Personalized discovery</span>
@@ -299,7 +299,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="section directory-section">
+      <section className="section directory-section home-tasks-section">
         <div className="container">
           <SectionHeader label="Browse by task" title="What do you want help with?" description="Choose a task to see tools suited to that type of work." to="/tasks" action="View all tasks" />
           <div className="grid-tasks home-task-grid">
@@ -308,7 +308,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="section directory-section">
+      <section className="section directory-section home-latest-section">
         <div className="container">
           <SectionHeader label="Recently added" title="New listings" description="New tools and product updates added to the directory." to="/new" action="View new tools" />
           <div className="directory-latest-list">
@@ -325,7 +325,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="section directory-section directory-section-alt">
+      <section className="section directory-section directory-section-alt home-review-section">
         <div className="container">
           <SectionHeader label="Our review process" title="How we research and organize AI tools" description="A transparent workflow for useful listings, practical reviews and clearly disclosed promotions." to="/review-methodology" action="Read the full methodology" />
           <div className="home-review-process">
@@ -352,7 +352,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="section directory-section">
+      <section className="section directory-section home-comparison-section">
         <div className="container">
           <SectionHeader label="Compare" title="Compare popular tools" description="Review the main differences before choosing a product." to="/compare" action="All comparisons" />
           <div className="directory-comparison-grid">

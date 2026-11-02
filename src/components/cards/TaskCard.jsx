@@ -17,7 +17,7 @@ export default function TaskCard({ task }) {
   return (
     <Link
       to={`/task/${task.slug}`}
-      className="glass-card"
+      className="glass-card task-card"
       style={{
         display: 'flex',
         flexDirection: 'column',
@@ -26,8 +26,9 @@ export default function TaskCard({ task }) {
         borderRadius: '16px'
       }}
     >
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.875rem' }}>
+      <div className="task-card-top" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.875rem' }}>
         <div
+          className="task-card-icon"
           style={{
             width: '40px',
             height: '40px',
@@ -45,6 +46,7 @@ export default function TaskCard({ task }) {
 
         {task.badge && (
           <span
+            className="task-card-badge"
             style={{
               fontSize: '0.71875rem',
               fontWeight: '600',
@@ -60,11 +62,12 @@ export default function TaskCard({ task }) {
         )}
       </div>
 
-      <h3 style={{ fontSize: '1.0625rem', fontWeight: '700', color: '#f8fafc', marginBottom: '0.35rem' }}>
+      <h3 className="task-card-title" style={{ fontSize: '1.0625rem', fontWeight: '700', color: '#f8fafc', marginBottom: '0.35rem' }}>
         {task.name}
       </h3>
 
       <p
+        className="task-card-summary"
         style={{
           fontSize: '0.8125rem',
           color: '#94a3b8',
@@ -77,6 +80,7 @@ export default function TaskCard({ task }) {
       </p>
 
       <div
+        className="task-card-footer"
         style={{
           display: 'flex',
           alignItems: 'center',
@@ -86,11 +90,11 @@ export default function TaskCard({ task }) {
           marginTop: 'auto'
         }}
       >
-        <span style={{ fontSize: '0.78125rem', color: '#64748b' }}>
+        <span className="task-card-count" style={{ fontSize: '0.78125rem', color: '#64748b' }}>
           {task.toolCount} curated tools
         </span>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', fontSize: '0.78125rem', fontWeight: '600', color: '#38bdf8' }}>
+        <div className="task-card-action" style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', fontSize: '0.78125rem', fontWeight: '600', color: '#38bdf8' }}>
           <span>View Tools</span>
           <ArrowRight size={13} />
         </div>
