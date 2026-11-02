@@ -42,7 +42,6 @@ import PrivacyPage from './pages/PrivacyPage';
 import RefundPolicyPage from './pages/RefundPolicyPage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
-import FaqPage from './pages/FaqPage';
 import NotFoundPage from './pages/NotFoundPage';
 import GenericInfoPage from './pages/GenericInfoPage';
 import PasswordPage from './pages/PasswordPage';
@@ -152,7 +151,6 @@ export default function App() {
         <Route path="/sponsored-policy" element={<SponsoredPolicyPage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/contact" element={<ContactPage />} />
-        <Route path="/faq" element={<FaqPage />} />
 
         {/* Account Authentication */}
         <Route path="/signup" element={<SignUpPage />} />

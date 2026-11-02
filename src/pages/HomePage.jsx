@@ -390,7 +390,6 @@ export default function HomePage() {
                 <span className="directory-faq-visual-line is-short" />
               </div>
             </div>
-            <Link to="/faq">Browse all questions <ArrowRight size={15} /></Link>
           </div>
           <div className="directory-faq-list">
             <details open><summary>What is an AI tools directory?</summary><p>An AI tools directory organizes software by task, category, pricing and use case so people can discover and compare relevant products in one place.</p></details>

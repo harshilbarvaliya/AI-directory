@@ -6,7 +6,7 @@ const groups = [
   { title: 'Discover', links: [['All AI Tools','/tools'],['Categories','/categories'],['Tasks & Use Cases','/tasks'],['Industries','/industries'],['Free AI Tools','/free-ai-tools'],['Trending AI Tools','/trending'],['New Releases','/new']] },
   { title: 'Resources', links: [['Compare Hub','/compare'],['Tool Alternatives','/alternatives'],['AI Matchmaker Finder','/ai-finder'],['Editorial Reviews','/reviews'],['Exclusive AI Deals','/deals'],['Blog & Growth Guides','/blog'],['AI Launches','/launches']] },
   { title: 'For Founders', links: [['Submit AI Tool','/submit'],['Founder Pricing & Plans','/pricing'],['Promote Your Tool','/promote'],['Get Verified Badge','/verified'],['Claim Existing Listing','/claim'],['Advertise / Sponsor','/advertise'],['Founder Dashboard','/founder/dashboard']] },
-  { title: 'Trust & Integrity', links: [['About AI Directory','/about'],['How Rankings Work','/ranking-methodology'],['Review Methodology','/review-methodology'],['Sponsored Content Policy','/sponsored-policy'],['Frequently Asked Questions','/faq'],['Contact & Support','/contact']] },
+  { title: 'Trust & Integrity', links: [['About AI Directory','/about'],['How Rankings Work','/ranking-methodology'],['Review Methodology','/review-methodology'],['Sponsored Content Policy','/sponsored-policy'],['Contact & Support','/contact']] },
   { title: 'Legal & Policy', links: [['Terms of Service','/terms'],['Privacy Policy','/privacy'],['Cookie Policy','/cookies'],['Refund Policy','/refund-policy'],['Community & UGC Guidelines','/community-guidelines']] }
 ];
 

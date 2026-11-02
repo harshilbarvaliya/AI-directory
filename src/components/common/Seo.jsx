@@ -21,8 +21,7 @@ const staticSeo = {
   '/review-methodology': ['AI Tool Review Methodology | AI Directory', 'Learn how AI tools are selected, assessed and corrected, and how sponsorship is separated from editorial conclusions.'],
   '/sponsored-policy': ['Sponsored Content and Paid Placement Policy', 'Understand what paid AI tool promotion can buy, what it cannot influence and how sponsored placements are labeled.'],
   '/about': ['About AI Directory and Our Editorial Principles', 'Learn why AI Directory exists, how tool discovery works and the principles guiding rankings, reviews and sponsorship labels.'],
-  '/contact': ['Contact AI Directory', 'Contact AI Directory for listing corrections, founder support, advertising questions or policy concerns.'],
-  '/faq': ['AI Directory Frequently Asked Questions', 'Answers about AI tool listings, submissions, rankings, sponsored placements, verification, reviews and founder plans.']
+  '/contact': ['Contact AI Directory', 'Contact AI Directory for listing corrections, founder support, advertising questions or policy concerns.']
 };
 
 function setMeta(selector, attribute, value) {
