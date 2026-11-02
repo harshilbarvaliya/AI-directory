@@ -337,17 +337,23 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="section directory-section">
+      <section className="section directory-section home-about-section">
         <div className="container home-about-directory">
-          <div>
+          <div className="home-about-heading">
             <span className="directory-eyebrow">About the directory</span>
             <h2>What is AI Directory?</h2>
+            <p className="home-about-kicker">A clearer way to discover, compare and choose AI software.</p>
+            <div className="home-about-highlights">
+              <div><ShieldCheck size={20} /><span><strong>Independent by design</strong><small>Paid placement never changes organic rankings.</small></span></div>
+              <div><ClipboardCheck size={20} /><span><strong>Structured for decisions</strong><small>Tools are organized by task, use case and pricing.</small></span></div>
+            </div>
           </div>
-          <div>
+          <div className="home-about-copy">
+            <span className="home-about-copy-label"><Sparkles size={15} /> Built for better software choices</span>
             <p>AI Directory is an independent discovery and comparison platform for people choosing software for coding, content, design, research, marketing and automation.</p>
             <p>Listings are organized by task, category, profession and pricing model. Product information may come from official sources or founder submissions; hands-on editorial conclusions are presented separately and only when supported by direct review.</p>
             <p>Pricing and features can change, so important commercial details should always be confirmed on the provider's official website before purchase.</p>
-            <div><Link to="/about">About AI Directory <ArrowRight size={15} /></Link><Link to="/contact">Suggest a correction <ArrowRight size={15} /></Link></div>
+            <div className="home-about-actions"><Link to="/about">About AI Directory <ArrowRight size={15} /></Link><Link to="/contact">Suggest a correction <ArrowRight size={15} /></Link></div>
           </div>
         </div>
       </section>
