@@ -11,8 +11,20 @@ const groups = [
 ];
 
 export default function Footer() {
+  const handlePointerMove = (event) => {
+    const footer = event.currentTarget;
+    const bounds = footer.getBoundingClientRect();
+    footer.style.setProperty('--footer-mouse-x', `${event.clientX - bounds.left}px`);
+    footer.style.setProperty('--footer-mouse-y', `${event.clientY - bounds.top}px`);
+    footer.classList.add('footer-pointer-active');
+  };
+
+  const handlePointerLeave = (event) => {
+    event.currentTarget.classList.remove('footer-pointer-active');
+  };
+
   return (
-    <footer className="classic-footer">
+    <footer className="classic-footer" onPointerMove={handlePointerMove} onPointerLeave={handlePointerLeave}>
       <div className="container">
         <div className="classic-footer-grid">
           {groups.map(group => (
