@@ -2363,7 +2363,7 @@ footer [style*="linear-gradient"] { background:var(--bg-elevated) !important; }
 /* Footer wordmark and site-palette CTA */
 .directory-footer { background:#0d1a33 !important; }
 .directory-footer-wordmark { display:flex; justify-content:center; gap:.14em; margin-top:3.75rem; padding-top:2.1rem; overflow:hidden; border-top:1px solid rgba(148,163,184,.15); color:rgba(219,234,254,.14); font-size:clamp(4.5rem,14.2vw,13rem); font-weight:850; letter-spacing:-.085em; line-height:.78; text-align:center; white-space:nowrap; user-select:none; }
-.directory-home .directory-submit-section { background:linear-gradient(to bottom,var(--home-surface) 0 50%,#0b1024 50% 100%); }
+.directory-home .directory-submit-section { background:linear-gradient(to bottom,var(--home-surface) 0 50%,#07090d 50% 100%); }
 .directory-home .directory-submit-inner { border-color:rgba(129,140,248,.24); background:linear-gradient(132deg,#28377c 0%,#1c1d50 37%,#0d1735 76%); }
 .directory-home .directory-submit-inner::before { background:radial-gradient(circle,rgba(96,165,250,.35),rgba(96,165,250,0) 68%); }
 .directory-home .directory-submit-inner::after { border-color:rgba(165,180,252,.25); background:rgba(99,102,241,.06); box-shadow:0 0 0 54px rgba(99,102,241,.035); }
