@@ -137,7 +137,7 @@ export default function HomePage() {
             <div className="home-tool-marquee-group">
               {marqueeTools.map(tool => (
                 <Link to={`/tool/${tool.slug}`} key={tool.id}>
-                  <img src={tool.logo} alt="" loading="lazy" />
+                  <img src={tool.logo} alt="" loading="lazy" decoding="async" />
                   <span>{tool.name}</span>
                 </Link>
               ))}
@@ -145,7 +145,7 @@ export default function HomePage() {
             <div className="home-tool-marquee-group" aria-hidden="true">
               {marqueeTools.map(tool => (
                 <span className="home-tool-marquee-copy" key={`copy-${tool.id}`}>
-                  <img src={tool.logo} alt="" loading="lazy" />
+                  <img src={tool.logo} alt="" loading="lazy" decoding="async" />
                   <span>{tool.name}</span>
                 </span>
               ))}
@@ -175,7 +175,7 @@ export default function HomePage() {
                   <div className={`home-category-panel-list ${matches.length ? '' : 'is-empty'}`}>
                     {matches.length ? matches.map(tool => (
                       <Link to={`/tool/${tool.slug}`} key={tool.id}>
-                        <img src={tool.logo} alt="" loading="lazy" />
+                        <img src={tool.logo} alt="" loading="lazy" decoding="async" />
                         <span>{tool.name}</span>
                         <ArrowRight size={12} />
                       </Link>
@@ -208,6 +208,7 @@ export default function HomePage() {
                     src={getWebsitePreview(tool.websiteUrl)}
                     alt={`${tool.name} website preview`}
                     loading="lazy"
+                    decoding="async"
                     onError={event => {
                       event.currentTarget.onerror = null;
                       event.currentTarget.src = createToolFallback(tool.name, true);
@@ -219,6 +220,7 @@ export default function HomePage() {
                     src={tool.logo}
                     alt=""
                     loading="lazy"
+                    decoding="async"
                     onError={event => {
                       event.currentTarget.onerror = null;
                       event.currentTarget.src = createToolFallback(tool.name);
@@ -335,7 +337,7 @@ export default function HomePage() {
           <div className="directory-latest-list">
             {latestTools.map(tool => (
               <Link to={`/tool/${tool.slug}`} className="directory-latest-row" key={tool.id}>
-                <img src={tool.logo} alt="" />
+                <img src={tool.logo} alt="" loading="lazy" decoding="async" />
                 <span className="directory-latest-name"><strong>{tool.name}</strong><small>{tool.tagline}</small></span>
                 <span className="directory-latest-category">{tool.category}</span>
                 <span className="directory-latest-price">{tool.pricingType}</span>
@@ -367,7 +369,7 @@ export default function HomePage() {
               <div className="home-fresh-list">
                 {launchTools.map(tool => (
                   <Link to={`/tool/${tool.slug}`} key={tool.id}>
-                    <img src={tool.logo} alt="" loading="lazy" />
+                    <img src={tool.logo} alt="" loading="lazy" decoding="async" />
                     <span><strong>{tool.name}</strong><small>{tool.category}</small></span>
                     <b>{tool.pricingType}</b>
                     <ArrowRight size={15} />

@@ -62,12 +62,14 @@ export default function ToolDetailPage() {
               <div className="tool-profile-logo">
                 <img src={tool.logo} alt={`${tool.name} logo`} />
               </div>
-              <h1 id="tool-profile-title">{tool.name}</h1>
-              {tool.verified && (
-                <span className="tool-profile-verified-mark" title="Verified tool" aria-label="Verified tool">
-                  <img src="/assets/meta-verified-badge.png" alt="" aria-hidden="true" />
-                </span>
-              )}
+              <div className="tool-profile-title-line">
+                <h1 id="tool-profile-title">{tool.name}</h1>
+                {tool.verified && (
+                  <span className="tool-profile-verified-mark" title="Verified tool" aria-label="Verified tool">
+                    <img src="/assets/meta-verified-badge.png" alt="" aria-hidden="true" />
+                  </span>
+                )}
+              </div>
             </div>
             <div className="tool-profile-logo-row">
               <div className="tool-profile-badges">
@@ -109,6 +111,9 @@ export default function ToolDetailPage() {
                   key={tool.id}
                   src={screenshotUrl}
                   alt={`${tool.name} website preview`}
+                  loading="lazy"
+                  decoding="async"
+                  fetchpriority="low"
                   referrerPolicy="no-referrer"
                   onError={() => setScreenshotFailed(true)}
                 />
@@ -293,7 +298,7 @@ export default function ToolDetailPage() {
                 <article className="tool-profile-related-card" key={relatedTool.id}>
                   <header className="tool-profile-related-card-top">
                     <div className="tool-profile-related-logo">
-                      <img src={relatedTool.logo} alt={`${relatedTool.name} logo`} loading="lazy" />
+                      <img src={relatedTool.logo} alt={`${relatedTool.name} logo`} loading="lazy" decoding="async" />
                     </div>
                     <div className="tool-profile-related-identity">
                       <h3><Link to={`/tool/${relatedTool.slug}`}>{relatedTool.name}</Link></h3>

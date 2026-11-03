@@ -273,7 +273,7 @@ export default function Header() {
         </nav>
 
         {/* Action CTAs */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+        <div className="header-actions" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
           <div className="theme-switch" aria-label="Website color theme">
             <button type="button" className={theme === 'light' ? 'active' : ''} onClick={() => setActiveTheme('light')} aria-label="Use light mode" title="Light mode">
               <Sun size={16} /><span>Light</span>
@@ -361,8 +361,12 @@ export default function Header() {
       )}
 
       <style>{`
-        @media (max-width: 900px) {
+        @media (max-width: 1100px) {
           .desktop-nav {
+            display: none !important;
+          }
+          .header-actions > .theme-switch,
+          .header-actions > .btn {
             display: none !important;
           }
           .mobile-toggle {

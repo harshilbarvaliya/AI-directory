@@ -84,7 +84,15 @@ export default function Footer({ cta = defaultFooterCta }) {
         <div className="footer-live-finale">
           <div className="footer-art-wordmark">AI Directory</div>
           <div className="footer-image-stage">
-            <img src="/assets/ai-directory-footer-network.png" alt="Interactive AI tools network" />
+            <img
+              src="/assets/ai-directory-footer-network.webp"
+              alt="Interactive AI tools network"
+              width="2048"
+              height="683"
+              loading="lazy"
+              decoding="async"
+              fetchpriority="low"
+            />
             <svg className="footer-data-flow" viewBox="0 0 2048 683" preserveAspectRatio="none" aria-hidden="true">
               <g className="footer-network-packet footer-network-packet-1"><circle cx="282" cy="460" r="5" /><circle cx="282" cy="460" r="11" /></g>
               <g className="footer-network-packet footer-network-packet-2"><circle cx="641" cy="352" r="5" /><circle cx="641" cy="352" r="11" /></g>

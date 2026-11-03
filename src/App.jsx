@@ -1,55 +1,62 @@
-import React from 'react';
-import { Routes, Route, ScrollRestoration } from 'react-router-dom';
+import React, { lazy, Suspense } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import Layout from './components/layout/Layout';
 
-// Core & Discovery Pages
-import HomePage from './pages/HomePage';
-import ToolsPage from './pages/ToolsPage';
-import CategoriesPage from './pages/CategoriesPage';
-import CategoryDetailPage from './pages/CategoryDetailPage';
-import TasksPage from './pages/TasksPage';
-import TaskDetailPage from './pages/TaskDetailPage';
-import ToolDetailPage from './pages/ToolDetailPage';
-import CompareHubPage from './pages/CompareHubPage';
-import ToolVsToolPage from './pages/ToolVsToolPage';
-import ToolAlternativesPage from './pages/ToolAlternativesPage';
-import AiFinderPage from './pages/AiFinderPage';
-import DealsPage from './pages/DealsPage';
-import LaunchesPage from './pages/LaunchesPage';
-import ReviewsPage from './pages/ReviewsPage';
-import FreeToolsPage from './pages/FreeToolsPage';
-import TrendingPage from './pages/TrendingPage';
-import NewToolsPage from './pages/NewToolsPage';
-import SearchResultsPage from './pages/SearchResultsPage';
+// Every page is split into its own production chunk so the first visit only
+// downloads the route the visitor actually opens.
+const HomePage = lazy(() => import('./pages/HomePage'));
+const ToolsPage = lazy(() => import('./pages/ToolsPage'));
+const CategoriesPage = lazy(() => import('./pages/CategoriesPage'));
+const CategoryDetailPage = lazy(() => import('./pages/CategoryDetailPage'));
+const TasksPage = lazy(() => import('./pages/TasksPage'));
+const TaskDetailPage = lazy(() => import('./pages/TaskDetailPage'));
+const ToolDetailPage = lazy(() => import('./pages/ToolDetailPage'));
+const CompareHubPage = lazy(() => import('./pages/CompareHubPage'));
+const ToolVsToolPage = lazy(() => import('./pages/ToolVsToolPage'));
+const ToolAlternativesPage = lazy(() => import('./pages/ToolAlternativesPage'));
+const AiFinderPage = lazy(() => import('./pages/AiFinderPage'));
+const DealsPage = lazy(() => import('./pages/DealsPage'));
+const LaunchesPage = lazy(() => import('./pages/LaunchesPage'));
+const ReviewsPage = lazy(() => import('./pages/ReviewsPage'));
+const FreeToolsPage = lazy(() => import('./pages/FreeToolsPage'));
+const TrendingPage = lazy(() => import('./pages/TrendingPage'));
+const NewToolsPage = lazy(() => import('./pages/NewToolsPage'));
+const SearchResultsPage = lazy(() => import('./pages/SearchResultsPage'));
+const SubmitPage = lazy(() => import('./pages/SubmitPage'));
+const SubmitFormPage = lazy(() => import('./pages/SubmitFormPage'));
+const SubmitSuccessPage = lazy(() => import('./pages/SubmitSuccessPage'));
+const PromotePage = lazy(() => import('./pages/PromotePage'));
+const FounderPricingPage = lazy(() => import('./pages/FounderPricingPage'));
+const FounderDashboardPage = lazy(() => import('./pages/FounderDashboardPage'));
+const ManageListingPage = lazy(() => import('./pages/ManageListingPage'));
+const RankingMethodologyPage = lazy(() => import('./pages/RankingMethodologyPage'));
+const ReviewMethodologyPage = lazy(() => import('./pages/ReviewMethodologyPage'));
+const SponsoredPolicyPage = lazy(() => import('./pages/SponsoredPolicyPage'));
+const SignUpPage = lazy(() => import('./pages/SignUpPage'));
+const LoginPage = lazy(() => import('./pages/LoginPage'));
+const TermsPage = lazy(() => import('./pages/TermsPage'));
+const PrivacyPage = lazy(() => import('./pages/PrivacyPage'));
+const RefundPolicyPage = lazy(() => import('./pages/RefundPolicyPage'));
+const AboutPage = lazy(() => import('./pages/AboutPage'));
+const ContactPage = lazy(() => import('./pages/ContactPage'));
+const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
+const GenericInfoPage = lazy(() => import('./pages/GenericInfoPage'));
+const PasswordPage = lazy(() => import('./pages/PasswordPage'));
+const AdminPage = lazy(() => import('./pages/AdminPage'));
 
-// Founder Portal Pages
-import SubmitPage from './pages/SubmitPage';
-import SubmitFormPage from './pages/SubmitFormPage';
-import SubmitSuccessPage from './pages/SubmitSuccessPage';
-import PromotePage from './pages/PromotePage';
-import FounderPricingPage from './pages/FounderPricingPage';
-import FounderDashboardPage from './pages/FounderDashboardPage';
-import ManageListingPage from './pages/ManageListingPage';
-
-// Trust, Legal & Account Pages
-import RankingMethodologyPage from './pages/RankingMethodologyPage';
-import ReviewMethodologyPage from './pages/ReviewMethodologyPage';
-import SponsoredPolicyPage from './pages/SponsoredPolicyPage';
-import SignUpPage from './pages/SignUpPage';
-import LoginPage from './pages/LoginPage';
-import TermsPage from './pages/TermsPage';
-import PrivacyPage from './pages/PrivacyPage';
-import RefundPolicyPage from './pages/RefundPolicyPage';
-import AboutPage from './pages/AboutPage';
-import ContactPage from './pages/ContactPage';
-import NotFoundPage from './pages/NotFoundPage';
-import GenericInfoPage from './pages/GenericInfoPage';
-import PasswordPage from './pages/PasswordPage';
-import AdminPage from './pages/AdminPage';
+function RouteLoader() {
+  return (
+    <div className="route-loader" role="status" aria-live="polite">
+      <span className="route-loader-spinner" aria-hidden="true" />
+      <span>Loading page…</span>
+    </div>
+  );
+}
 
 export default function App() {
   return (
     <Layout>
+      <Suspense fallback={<RouteLoader />}>
       <Routes>
         {/* Core & Discovery */}
         <Route path="/" element={<HomePage />} />
@@ -198,6 +205,7 @@ export default function App() {
         <Route path="/404" element={<NotFoundPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
+      </Suspense>
     </Layout>
   );
 }

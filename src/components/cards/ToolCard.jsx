@@ -46,6 +46,7 @@ export default function ToolCard({ tool, featured = false, compact = false }) {
               alt={`${tool.name} logo`}
               style={{ width: '100%', height: '100%', objectFit: 'cover' }}
               loading="lazy"
+              decoding="async"
             />
           </div>
 
