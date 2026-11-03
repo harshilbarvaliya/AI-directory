@@ -1133,6 +1133,12 @@ footer [style*="linear-gradient"] { background:var(--bg-elevated) !important; }
 .classic-footer { --footer-mouse-x:50%; --footer-mouse-y:20%; position:relative; width:100%; padding:clamp(3rem,5vw,4.5rem) 0 1.75rem; overflow:hidden; border-top:0; background:#07090d !important; isolation:isolate; }
 .classic-footer::before { content:''; position:absolute; inset:0; z-index:0; background:radial-gradient(430px circle at var(--footer-mouse-x) var(--footer-mouse-y),rgba(99,102,241,.18),rgba(37,99,235,.07) 38%,transparent 72%); opacity:0; pointer-events:none; transition:opacity .25s ease; }
 .classic-footer.footer-pointer-active::before { opacity:1; }
+.footer-clone-field { position:absolute; inset:0; z-index:0; overflow:hidden; opacity:0; pointer-events:none; transition:opacity .25s ease; }
+.classic-footer.footer-pointer-active .footer-clone-field { opacity:.88; }
+.classic-footer .footer-clone-field .section-clone { mix-blend-mode:screen; opacity:.8; }
+.footer-ambient-orb { position:absolute; z-index:0; pointer-events:none; }
+.footer-ambient-orb-one { width:112px; height:112px; top:12%; right:7%; border:1px solid rgba(129,140,248,.3); border-radius:50%; background:radial-gradient(circle at 32% 28%,rgba(255,255,255,.12),rgba(99,102,241,.18) 45%,transparent 72%); box-shadow:inset 10px 10px 24px rgba(67,56,202,.12); animation:backgroundBubbleOne 12s ease-in-out infinite; }
+.footer-ambient-orb-two { width:62px; height:62px; left:6%; bottom:18%; border:1px solid rgba(34,211,238,.26); border-radius:42% 58% 62% 38% / 48% 38% 62% 52%; background:radial-gradient(circle at 30% 26%,rgba(255,255,255,.1),rgba(6,182,212,.15) 48%,transparent 74%); animation:backgroundBubbleTwo 10s ease-in-out -3s infinite; }
 .classic-footer>.container { --footer-gutter:clamp(1rem,3vw,1.5rem); position:relative; z-index:1; max-width:var(--container-max); padding-left:var(--footer-gutter); padding-right:var(--footer-gutter); }
 .classic-footer-grid { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:clamp(1.5rem,3vw,2.5rem); margin-bottom:2.5rem; }
 .classic-footer-grid h3 { margin:0 0 1.25rem; color:#d7dde7 !important; font-size:.78rem; font-weight:750; letter-spacing:.045em; text-transform:uppercase; }
@@ -1241,7 +1247,7 @@ footer [style*="linear-gradient"] { background:var(--bg-elevated) !important; }
 }
 
 @media(hover:none),(prefers-reduced-motion:reduce) {
-  .classic-footer::before { display:none; }
+  .classic-footer::before,.footer-clone-field,.footer-ambient-orb { display:none; }
 }
 
 /* Premium home motion */

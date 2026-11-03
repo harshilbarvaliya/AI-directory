@@ -14,8 +14,12 @@ export default function Footer() {
   const handlePointerMove = (event) => {
     const footer = event.currentTarget;
     const bounds = footer.getBoundingClientRect();
-    footer.style.setProperty('--footer-mouse-x', `${event.clientX - bounds.left}px`);
-    footer.style.setProperty('--footer-mouse-y', `${event.clientY - bounds.top}px`);
+    const mouseX = `${event.clientX - bounds.left}px`;
+    const mouseY = `${event.clientY - bounds.top}px`;
+    footer.style.setProperty('--footer-mouse-x', mouseX);
+    footer.style.setProperty('--footer-mouse-y', mouseY);
+    footer.style.setProperty('--section-mouse-x', mouseX);
+    footer.style.setProperty('--section-mouse-y', mouseY);
     footer.classList.add('footer-pointer-active');
   };
 
@@ -25,6 +29,15 @@ export default function Footer() {
 
   return (
     <footer className="classic-footer" onPointerMove={handlePointerMove} onPointerLeave={handlePointerLeave}>
+      <div className="footer-clone-field" aria-hidden="true">
+        <span className="section-clone section-clone-1" />
+        <span className="section-clone section-clone-2" />
+        <span className="section-clone section-clone-3" />
+        <span className="section-clone section-clone-4" />
+        <span className="section-clone section-clone-5" />
+      </div>
+      <span className="footer-ambient-orb footer-ambient-orb-one" aria-hidden="true" />
+      <span className="footer-ambient-orb footer-ambient-orb-two" aria-hidden="true" />
       <div className="container">
         <div className="classic-footer-grid">
           {groups.map(group => (
