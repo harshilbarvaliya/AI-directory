@@ -3,7 +3,6 @@ import { Link, useParams } from 'react-router-dom';
 import {
   AlertCircle,
   ArrowRight,
-  Bookmark,
   Check,
   CheckCircle2,
   ChevronRight,
@@ -11,7 +10,6 @@ import {
   ExternalLink,
   Layers3,
   MonitorPlay,
-  ShieldCheck,
   Star,
   X
 } from 'lucide-react';
@@ -27,7 +25,6 @@ const pricingCopy = {
 
 export default function ToolDetailPage() {
   const { slug } = useParams();
-  const [saved, setSaved] = useState(false);
   const [screenshotFailed, setScreenshotFailed] = useState(false);
   const tool = tools.find((entry) => entry.slug === slug) || tools[0];
 
@@ -58,56 +55,54 @@ export default function ToolDetailPage() {
           <span>{tool.name}</span>
         </nav>
 
-        <p className="tool-profile-demo-note">
-          <AlertCircle size={15} />
-          Directory preview: confirm current features, prices and regional availability with the provider.
-        </p>
-
         <section className="tool-profile-hero" aria-labelledby="tool-profile-title">
-          <div className="tool-profile-hero-copy">
-            <div className="tool-profile-logo-row">
+          <div className="tool-profile-hero-intro">
+            <span className="tool-profile-eyebrow">{tool.category}</span>
+            <div className="tool-profile-hero-name">
               <div className="tool-profile-logo">
                 <img src={tool.logo} alt={`${tool.name} logo`} />
               </div>
+              <h1 id="tool-profile-title">{tool.name}</h1>
+              {tool.verified && (
+                <span className="tool-profile-verified-mark" title="Verified tool" aria-label="Verified tool">
+                  <img src="/assets/meta-verified-badge.png" alt="" aria-hidden="true" />
+                </span>
+              )}
+            </div>
+            <div className="tool-profile-logo-row">
               <div className="tool-profile-badges">
-                {tool.verified && <Badge type="verified" />}
                 {tool.sponsored && <Badge type="sponsored" />}
                 {tool.new && <Badge type="new" />}
                 <span className="tool-profile-price-badge">{tool.pricingType}</span>
               </div>
             </div>
-
-            <span className="tool-profile-eyebrow">{tool.category}</span>
-            <h1 id="tool-profile-title">{tool.name}</h1>
             <p className="tool-profile-tagline">{tool.tagline}</p>
+          </div>
 
-            <div className="tool-profile-facts" aria-label="Tool summary">
-              <span><Star size={16} fill="currentColor" /> {tool.rating} directory score</span>
-              <span><Layers3 size={16} /> {tool.pricingType}</span>
-              <span><Clock3 size={16} /> Starts at {tool.startingPrice}</span>
-            </div>
-
+          <aside className="tool-profile-hero-aside" aria-label={`${tool.name} quick facts`}>
+            <span className="tool-profile-section-label">At a glance</span>
+            <dl>
+              <div><dt><Star size={16} fill="currentColor" /> Directory score</dt><dd>{tool.rating}</dd></div>
+              <div><dt><Layers3 size={16} /> Pricing model</dt><dd>{tool.pricingType}</dd></div>
+              <div><dt><Clock3 size={16} /> Starting price</dt><dd>{tool.startingPrice}</dd></div>
+              <div><dt><CheckCircle2 size={16} /> Free access</dt><dd>{tool.freeTrial ? 'Listed' : 'Not listed'}</dd></div>
+            </dl>
             <div className="tool-profile-actions">
               <a className="tool-profile-primary-action" href={tool.websiteUrl} target="_blank" rel="noopener noreferrer">
                 Visit official website <ExternalLink size={17} />
               </a>
-              <button className={`tool-profile-save${saved ? ' is-saved' : ''}`} type="button" onClick={() => setSaved((value) => !value)}>
-                <Bookmark size={17} fill={saved ? 'currentColor' : 'none'} />
-                {saved ? 'Saved' : 'Save tool'}
-              </button>
             </div>
+          </aside>
+        </section>
 
-            <div className="tool-profile-trust-line">
-              <ShieldCheck size={17} />
-              <span>Independent directory profile. External product terms may change.</span>
+        <section className="tool-profile-media-stage" aria-labelledby="tool-preview-title">
+          <div className="tool-profile-media-heading">
+            <div>
+              <span className="tool-profile-section-label">Product interface</span>
+              <h2 id="tool-preview-title">See {tool.name} in context</h2>
             </div>
           </div>
-
           <div className="tool-profile-visual" aria-label={`${tool.name} website preview`}>
-            <div className="tool-profile-browser-bar">
-              <span /><span /><span />
-              <small>Product preview</small>
-            </div>
             {!screenshotFailed ? (
               <figure className="tool-profile-screenshot">
                 <img
@@ -117,10 +112,6 @@ export default function ToolDetailPage() {
                   referrerPolicy="no-referrer"
                   onError={() => setScreenshotFailed(true)}
                 />
-                <figcaption>
-                  <span><MonitorPlay size={14} /> {tool.name} product image</span>
-                  <small>Preview may differ from the current product</small>
-                </figcaption>
               </figure>
             ) : (
               <div className="tool-profile-visual-canvas tool-profile-image-fallback">
@@ -169,6 +160,29 @@ export default function ToolDetailPage() {
                     <h3>{feature}</h3>
                   </article>
                 ))}
+              </div>
+            </section>
+
+            <section className="tool-profile-section tool-profile-inline-pricing" id="pricing">
+              <div className="tool-profile-inline-pricing-heading">
+                <div>
+                  <span className="tool-profile-section-label">Pricing snapshot</span>
+                  <div className="tool-profile-price-heading">
+                    <strong>{tool.startingPrice}</strong>
+                    <small>listed starting price</small>
+                  </div>
+                </div>
+                <p>{priceSummary}</p>
+              </div>
+              <div className="tool-profile-inline-pricing-details">
+                <ul>
+                  <li><Check size={16} /> Model: {tool.pricingType}</li>
+                  <li><Check size={16} /> {tool.freeTrial ? 'Free access or trial listed' : 'No free trial recorded'}</li>
+                  <li><Check size={16} /> Web-based product</li>
+                </ul>
+                <p className="tool-profile-inline-pricing-note">
+                  Pricing, taxes and plan availability can vary by region. Confirm the latest details on the official website before choosing a plan.
+                </p>
               </div>
             </section>
 
@@ -224,24 +238,6 @@ export default function ToolDetailPage() {
           </div>
 
           <aside className="tool-profile-sidebar" aria-label={`${tool.name} quick facts`}>
-            <section className="tool-profile-side-card" id="pricing">
-              <span className="tool-profile-section-label">Pricing snapshot</span>
-              <div className="tool-profile-price-heading">
-                <strong>{tool.startingPrice}</strong>
-                <small>listed starting price</small>
-              </div>
-              <p>{priceSummary}</p>
-              <ul>
-                <li><Check size={16} /> Model: {tool.pricingType}</li>
-                <li><Check size={16} /> {tool.freeTrial ? 'Free access or trial listed' : 'No free trial recorded'}</li>
-                <li><Check size={16} /> Web-based product</li>
-              </ul>
-              <a href={tool.websiteUrl} target="_blank" rel="noopener noreferrer">
-                Check current pricing <ExternalLink size={15} />
-              </a>
-              <small className="tool-profile-price-note">Check taxes, USD/GBP conversion and regional plan availability on the official website.</small>
-            </section>
-
             <section className="tool-profile-side-card tool-profile-glance-card">
               <span className="tool-profile-section-label">At a glance</span>
               <dl>
