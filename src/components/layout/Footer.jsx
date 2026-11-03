@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Github, Linkedin, ShieldCheck, Sparkles, Twitter } from 'lucide-react';
+import { ArrowRight, Github, Linkedin, ShieldCheck, Sparkles, Twitter } from 'lucide-react';
+import { defaultFooterCta } from '../../data/footerCta';
 
 const groups = [
   { title: 'Discover', links: [['All AI Tools','/tools'],['Categories','/categories'],['Tasks & Use Cases','/tasks'],['Industries','/industries'],['Free AI Tools','/free-ai-tools'],['Trending AI Tools','/trending'],['New Releases','/new']] },
@@ -10,7 +11,8 @@ const groups = [
   { title: 'Legal & Policy', links: [['Terms of Service','/terms'],['Privacy Policy','/privacy'],['Cookie Policy','/cookies'],['Refund Policy','/refund-policy'],['Community & UGC Guidelines','/community-guidelines']] }
 ];
 
-export default function Footer() {
+export default function Footer({ cta = defaultFooterCta }) {
+  const ctaContent = { ...defaultFooterCta, ...cta };
   const handlePointerMove = (event) => {
     const footer = event.currentTarget;
     const bounds = footer.getBoundingClientRect();
@@ -28,7 +30,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="classic-footer" onPointerMove={handlePointerMove} onPointerLeave={handlePointerLeave}>
+    <footer className="classic-footer directory-home" onPointerMove={handlePointerMove} onPointerLeave={handlePointerLeave}>
       <div className="footer-clone-field" aria-hidden="true">
         <span className="section-clone section-clone-1" />
         <span className="section-clone section-clone-2" />
@@ -38,7 +40,24 @@ export default function Footer() {
       </div>
       <span className="footer-ambient-orb footer-ambient-orb-one" aria-hidden="true" />
       <span className="footer-ambient-orb footer-ambient-orb-two" aria-hidden="true" />
-      <div className="container">
+      <span className="footer-ambient-orb footer-ambient-orb-three" aria-hidden="true" />
+      <span className="footer-ambient-orb footer-ambient-orb-four" aria-hidden="true" />
+      <span className="footer-ambient-orb footer-ambient-orb-five" aria-hidden="true" />
+      <span className="footer-ambient-orb footer-ambient-orb-six" aria-hidden="true" />
+      <section className="directory-submit-section footer-cta-section">
+        <div className="container directory-submit-inner">
+          <span className="directory-submit-corner directory-submit-corner-left" aria-hidden="true" />
+          <span className="directory-submit-corner directory-submit-corner-right" aria-hidden="true" />
+          <div className="directory-submit-copy">
+            <span>{ctaContent.eyebrow}</span>
+            <h2>{ctaContent.title}<br /><em>{ctaContent.accent}</em></h2>
+            <p>{ctaContent.description}</p>
+            <Link className="directory-submit-button" to={ctaContent.buttonTo}>{ctaContent.buttonLabel} <ArrowRight size={17} /></Link>
+          </div>
+        </div>
+      </section>
+
+      <div className="container classic-footer-main">
         <div className="classic-footer-grid">
           {groups.map(group => (
             <div key={group.title}>

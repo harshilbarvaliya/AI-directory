@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   ArrowRight, BadgeCheck, BriefcaseBusiness, Camera,
   CircleHelp, ClipboardCheck, Code2,
@@ -12,6 +12,7 @@ import { tools, categories, tasks, comparisons } from '../data/mockData';
 
 export default function HomePage() {
   const heroRef = useRef(null);
+  const navigate = useNavigate();
   const popularTools = tools.slice(0, 8);
   const latestTools = tools.filter(tool => tool.new).slice(0, 4);
   const marqueeTools = tools.filter(tool => !['jasper', 'canva-magic-studio'].includes(tool.id));
@@ -31,7 +32,7 @@ export default function HomePage() {
   ];
 
   useEffect(() => {
-    const sections = document.querySelectorAll('.directory-home .directory-section, .directory-home .directory-submit-section');
+    const sections = document.querySelectorAll('.home-page.directory-home .directory-section');
     sections.forEach(section => section.classList.add('home-scroll-reveal'));
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
@@ -46,7 +47,7 @@ export default function HomePage() {
   }, []);
 
   useEffect(() => {
-    const sections = document.querySelectorAll('.directory-home section:not(.interactive-hero)');
+    const sections = document.querySelectorAll('.home-page.directory-home section:not(.interactive-hero)');
     const cleanups = [];
     sections.forEach(section => {
       section.classList.add('section-jelly-zone');
@@ -251,12 +252,19 @@ export default function HomePage() {
             {roles.map((role, index) => {
               const Icon = role.icon;
               return (
-                <Link className="role-card" style={{ '--role-color': role.color }} to={`/search?q=${encodeURIComponent(role.query)}`} key={role.name}>
+                <button
+                  className="role-card"
+                  style={{ '--role-color': role.color }}
+                  type="button"
+                  onClick={() => navigate(`/search?q=${encodeURIComponent(role.query)}`)}
+                  aria-label={`Search AI tools for ${role.name}`}
+                  key={role.name}
+                >
                   <span className="role-index">{String(index + 1).padStart(2, '0')}</span>
                   <span className="role-icon"><Icon size={21} /></span>
                   <span className="role-content"><strong>{role.name}</strong><small>{role.description}</small></span>
                   <span className="role-cta">{role.label} <ArrowRight size={15} /></span>
-                </Link>
+                </button>
               );
             })}
           </div>
@@ -402,18 +410,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="directory-submit-section">
-        <div className="container directory-submit-inner">
-          <span className="directory-submit-corner directory-submit-corner-left" aria-hidden="true" />
-          <span className="directory-submit-corner directory-submit-corner-right" aria-hidden="true" />
-          <div className="directory-submit-copy">
-            <span>For AI founders and product teams</span>
-            <h2>Get your AI tool discovered.<br /><em>Reach the right audience.</em></h2>
-            <p>Submit your product for an editorial review and put it in front of people actively comparing AI tools.</p>
-            <Link className="directory-submit-button" to="/submit">Submit your tool <ArrowRight size={17} /></Link>
-          </div>
-        </div>
-      </section>
     </div>
   );
 }
