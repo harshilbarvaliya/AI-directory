@@ -8,6 +8,14 @@ export const defaultFooterCta = Object.freeze({
 });
 
 const footerCtaByPath = Object.freeze({
+  '/': {
+    eyebrow: 'For AI founders and software teams',
+    title: 'Put your AI product in front of',
+    accent: 'buyers across the US and UK.',
+    description: 'Submit your product for editorial review and reach professionals actively comparing AI software for work and business.',
+    buttonLabel: 'Submit your AI tool',
+    buttonTo: '/submit'
+  },
   '/submit': {
     eyebrow: 'Launch with more confidence',
     title: 'Choose the right founder plan.',

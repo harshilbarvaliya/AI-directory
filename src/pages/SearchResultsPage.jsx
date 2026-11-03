@@ -8,18 +8,28 @@ import { tools } from '../data/mockData';
 export default function SearchResultsPage() {
   const [searchParams] = useSearchParams();
   const query = searchParams.get('q') || '';
+  const pricing = searchParams.get('pricing') || '';
+  const pricingLabel = {
+    free: 'Free',
+    freemium: 'Freemium',
+    paid: 'Paid',
+    trial: 'Free Trial'
+  }[pricing] || '';
 
   const results = useMemo(() => {
-    if (!query.trim()) return tools;
     const lower = query.toLowerCase();
-    return tools.filter(t => 
-      t.name.toLowerCase().includes(lower) ||
-      t.tagline.toLowerCase().includes(lower) ||
-      t.category.toLowerCase().includes(lower) ||
-      (t.tasks && t.tasks.some(task => task.toLowerCase().includes(lower))) ||
-      (t.features && t.features.some(f => f.toLowerCase().includes(lower)))
-    );
-  }, [query]);
+    return tools.filter(tool => {
+      const matchesQuery = !query.trim() ||
+        tool.name.toLowerCase().includes(lower) ||
+        tool.tagline.toLowerCase().includes(lower) ||
+        tool.category.toLowerCase().includes(lower) ||
+        (tool.tasks && tool.tasks.some(task => task.toLowerCase().includes(lower))) ||
+        (tool.features && tool.features.some(feature => feature.toLowerCase().includes(lower)));
+      const matchesPricing = !pricing ||
+        (pricing === 'trial' ? tool.freeTrial : tool.pricingType.toLowerCase() === pricing);
+      return matchesQuery && matchesPricing;
+    });
+  }, [query, pricing]);
 
   return (
     <div className="page-wrapper container">
@@ -29,10 +39,10 @@ export default function SearchResultsPage() {
           Discovery Results
         </div>
         <h1 className="page-hero-title">
-          {query ? `Search: "${query}"` : "Search Directory"}
+          {query ? `Search: "${query}"` : pricingLabel ? `${pricingLabel} AI Tools` : 'Search Directory'}
         </h1>
         <p className="page-hero-desc">
-          Found {results.length} sample directory {results.length === 1 ? 'listing' : 'listings'} matching your query.
+          Found {results.length} directory {results.length === 1 ? 'listing' : 'listings'} matching your selection.
         </p>
         <div style={{ marginTop: '1.5rem' }}>
           <SearchBar placeholder="Try searching another tool, workflow, or capability..." showChips={false} />
@@ -50,7 +60,7 @@ export default function SearchResultsPage() {
           <Sparkles size={36} style={{ color: '#818cf8', margin: '0 auto 1rem' }} />
           <h3 style={{ fontSize: '1.25rem', color: '#ffffff', marginBottom: '0.5rem' }}>No direct matches found</h3>
           <p style={{ color: '#94a3b8', fontSize: '0.875rem', marginBottom: '1.5rem' }}>
-            We couldn't find exact tools matching "{query}". Try searching by broader terms like "Code", "Writing", or "Free".
+            We couldn't find exact tools matching your selection. Try searching by broader terms like "Code", "Writing", or "Free".
           </p>
           <Link to="/tools" className="btn btn-primary btn-sm">
             Browse All Tools

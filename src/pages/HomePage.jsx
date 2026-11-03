@@ -1,34 +1,40 @@
 import React, { useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
-  ArrowRight, BadgeCheck, BriefcaseBusiness, Camera,
+  ArrowRight, BadgeCheck, BadgePercent, BriefcaseBusiness, Camera,
+  CircleDollarSign,
   CircleHelp, ClipboardCheck, Code2,
-  GraduationCap, LayoutGrid, Megaphone, Palette,
-  ShieldCheck, Sparkles, Target, Users, WandSparkles
+  Gift, GraduationCap, LayoutGrid, Megaphone, Palette, Rocket,
+  ShieldCheck, Sparkles, Users, WandSparkles
 } from 'lucide-react';
 import TaskCard from '../components/cards/TaskCard';
 import Button from '../components/common/Button';
-import { tools, categories, tasks, comparisons } from '../data/mockData';
+import SearchBar from '../components/common/SearchBar';
+import { tools, categories, tasks, comparisons, deals } from '../data/mockData';
 
 export default function HomePage() {
   const heroRef = useRef(null);
   const navigate = useNavigate();
   const popularTools = tools.slice(0, 8);
   const latestTools = tools.filter(tool => tool.new).slice(0, 4);
+  const launchTools = tools.filter(tool => tool.new || tool.trending).slice(0, 3);
   const marqueeTools = tools.filter(tool => !['jasper', 'canva-magic-studio'].includes(tool.id));
+  const populatedCategories = categories
+    .map(category => ({ ...category, matches: tools.filter(tool => tool.categorySlug === category.slug).slice(0, 7) }))
+    .filter(category => category.matches.length > 0);
   const roles = [
-    { name: 'Software developers', description: 'Coding, debugging and app-building tools', label: 'Build faster', color: '#6366f1', icon: Code2, query: 'coding' },
-    { name: 'Marketers', description: 'SEO, campaigns and growth workflows', label: 'Grow smarter', color: '#10b981', icon: Megaphone, query: 'marketing' },
-    { name: 'Content creators', description: 'Writing, video, image and voice tools', label: 'Create more', color: '#ec4899', icon: Palette, query: 'content' },
-    { name: 'Startup founders', description: 'Research, automation and support tools', label: 'Move quickly', color: '#f59e0b', icon: BriefcaseBusiness, query: 'productivity' },
-    { name: 'Students & researchers', description: 'Research, summaries and document analysis', label: 'Learn deeply', color: '#0ea5e9', icon: GraduationCap, query: 'research' },
-    { name: 'Teams & operations', description: 'Collaboration and repeatable workflows', label: 'Work together', color: '#8b5cf6', icon: Users, query: 'automation' }
+    { name: 'Software developers', description: 'Code generation, debugging and application development', label: 'Build better', color: '#6366f1', icon: Code2, query: 'coding' },
+    { name: 'Marketers', description: 'SEO, paid campaigns, analytics and content marketing', label: 'Grow your reach', color: '#10b981', icon: Megaphone, query: 'marketing' },
+    { name: 'Content creators', description: 'Writing, image, video and voice production', label: 'Create content', color: '#ec4899', icon: Palette, query: 'content' },
+    { name: 'Startup founders', description: 'Market research, automation, customer support and growth', label: 'Scale smarter', color: '#f59e0b', icon: BriefcaseBusiness, query: 'productivity' },
+    { name: 'Students & researchers', description: 'Literature review, source analysis and research synthesis', label: 'Research faster', color: '#0ea5e9', icon: GraduationCap, query: 'research' },
+    { name: 'Teams & operations', description: 'Documentation, collaboration and repeatable business processes', label: 'Work efficiently', color: '#8b5cf6', icon: Users, query: 'automation' }
   ];
-  const discoveryPaths = [
-    { title: 'Browse by task', copy: 'Start with the job you need to complete.', icon: Target, to: '/tasks', color: '#4f46e5' },
-    { title: 'Browse categories', copy: 'Explore tools by software capability.', icon: LayoutGrid, to: '/categories', color: '#7c3aed' },
-    { title: 'Browse by profession', copy: 'See practical tools for your role.', icon: BriefcaseBusiness, to: '#professions', color: '#0891b2' },
-    { title: 'Use AI Finder', copy: 'Match your role and budget to a stack.', icon: WandSparkles, to: '/ai-finder', color: '#059669' }
+  const pricingOptions = [
+    { id: 'free', title: 'Free', description: 'Use core features without a paid plan.', icon: Gift, color: '#0891b2', count: tools.filter(tool => tool.pricingType === 'Free').length },
+    { id: 'freemium', title: 'Freemium', description: 'Start free, then upgrade as your needs grow.', icon: Sparkles, color: '#4f46e5', count: tools.filter(tool => tool.pricingType === 'Freemium').length },
+    { id: 'paid', title: 'Paid', description: 'Premium software for professional and business use.', icon: CircleDollarSign, color: '#d97706', count: tools.filter(tool => tool.pricingType === 'Paid').length },
+    { id: 'trial', title: 'Free trial', description: 'Test premium features before purchasing a plan.', icon: BadgePercent, color: '#db2777', count: tools.filter(tool => tool.freeTrial).length }
   ];
 
   useEffect(() => {
@@ -116,15 +122,16 @@ export default function HomePage() {
         <div className="hero-particle hero-particle-two" />
         <div className="hero-particle hero-particle-three" />
         <div className="container home-hero-inner">
-          <h1>AI Tools Directory<br /><span className="hero-accent-line">with Honest Comparisons</span></h1>
-          <p>Find free and paid AI tools for your work. Compare practical use cases, pricing and important limitations before you choose.</p>
+          <h1><span className="hero-title-main">Find and Compare <span>AI Tools</span></span><span className="hero-accent-line">for Work and Business</span></h1>
+          <p>Discover AI software for writing, coding, marketing, design and research. Compare features, pricing, free plans and practical limitations before you choose.</p>
+          <SearchBar className="home-hero-search" placeholder="Search AI tools by name, task or category..." showChips={false} />
           <div className="hero-simple-actions">
-            <Button to="/tools" variant="primary" size="lg" icon={ArrowRight} iconPosition="right">Explore tools</Button>
+            <Button to="/tools" variant="primary" size="lg" icon={ArrowRight} iconPosition="right">Browse AI tools</Button>
           </div>
         </div>
       </section>
 
-      <section className="home-tool-marquee" aria-label="Popular AI tools covered in the directory">
+      <section className="home-tool-marquee" aria-label="Popular AI software available in the directory">
         <div className="home-tool-marquee-viewport">
           <div className="home-tool-marquee-track">
             <div className="home-tool-marquee-group">
@@ -150,13 +157,13 @@ export default function HomePage() {
       <section className="section directory-section directory-section-alt home-category-explorer-section">
         <div className="container">
           <div className="home-category-explorer-head">
-            <span>Popular AI categories</span>
-            <h2>Find the right category for the job</h2>
-            <p>Start with a category, preview matching tools and open the complete collection when you need more.</p>
+            <span>Browse AI software by category</span>
+            <h2>Explore AI tools for every workflow</h2>
+            <p>Compare software for coding, writing, research, design, video and everyday business productivity.</p>
           </div>
-          <div className="home-category-explorer">
-            {categories.map(category => {
-              const matches = tools.filter(tool => tool.categorySlug === category.slug).slice(0, 7);
+          <div className="home-category-explorer home-category-explorer-populated">
+            {populatedCategories.map(category => {
+              const matches = category.matches;
               return (
                 <article className="home-category-panel" key={category.id} style={{ '--category-color': category.color }}>
                   <header>
@@ -183,33 +190,13 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="section directory-section directory-discovery-section">
-        <div className="container">
-          <SectionHeader label="Start here" title="Find AI tools your way" description="Choose the discovery path that matches how you work." to="/tools" action="Explore all tools" />
-          <div className="home-discovery-grid">
-            {discoveryPaths.map((item, index) => {
-              const Icon = item.icon;
-              return item.to.startsWith('#') ? (
-                <a href={item.to} className="home-discovery-card" key={item.title} style={{ '--path-color': item.color }}>
-                  <small>{String(index + 1).padStart(2, '0')}</small><span><Icon size={22} /></span><div><h3>{item.title}</h3><p>{item.copy}</p></div><ArrowRight size={17} />
-                </a>
-              ) : (
-                <Link to={item.to} className="home-discovery-card" key={item.title} style={{ '--path-color': item.color }}>
-                  <small>{String(index + 1).padStart(2, '0')}</small><span><Icon size={22} /></span><div><h3>{item.title}</h3><p>{item.copy}</p></div><ArrowRight size={17} />
-                </Link>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
       <section className="section directory-section popular-tools-section">
         <div className="container">
           <div className="popular-tools-head">
             <div>
-              <span>Directory picks</span>
-              <h2>Popular AI Tools</h2>
-              <p>Discover useful AI tools making everyday work faster and easier.</p>
+              <span>Popular with professionals</span>
+              <h2>Popular AI tools for work</h2>
+              <p>Explore widely used AI software for professional work, creative projects and growing businesses.</p>
             </div>
             <Link to="/tools">View all <ArrowRight size={17} /></Link>
           </div>
@@ -245,9 +232,35 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section className="section directory-section home-pricing-browse-section" id="pricing">
+        <div className="container">
+          <SectionHeader label="Plans and pricing" title="Find AI tools for your budget" description="Compare free, freemium, paid and trial options before choosing a software plan." to="/tools" action="View all tools" />
+          <div className="home-pricing-browse-grid">
+            {pricingOptions.map(option => {
+              const Icon = option.icon;
+              return (
+                <button
+                  className="home-pricing-browse-card"
+                  style={{ '--pricing-color': option.color }}
+                  type="button"
+                  onClick={() => navigate(`/search?pricing=${encodeURIComponent(option.id)}`)}
+                  aria-label={`Search ${option.title} AI tools`}
+                  key={option.id}
+                >
+                  <span className="home-pricing-browse-icon"><Icon size={22} /></span>
+                  <span className="home-pricing-browse-copy"><strong>{option.title}</strong><small>{option.description}</small></span>
+                  <span className="home-pricing-browse-count">{option.count} tools</span>
+                  <ArrowRight size={17} />
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
       <section className="section directory-section directory-section-alt" id="professions">
         <div className="container">
-          <SectionHeader label="By profession" title="AI tools for the way you work" description="Explore focused recommendations for common roles and workflows." to="/ai-finder" action="Get a personal match" />
+          <SectionHeader label="Built for your role" title="AI tools for professionals and teams" description="Find practical AI software for developers, marketers, creators, founders, researchers and operations teams." to="/ai-finder" action="Get tailored matches" />
           <div className="role-grid">
             {roles.map((role, index) => {
               const Icon = role.icon;
@@ -274,34 +287,34 @@ export default function HomePage() {
       <section className="section directory-section home-tasks-section">
         <div className="container home-finder-panel">
           <div className="home-finder-copy">
-            <span className="directory-eyebrow"><WandSparkles size={14} /> Personalized discovery</span>
-            <h2>Find the right AI tools in under a minute.</h2>
-            <p>Tell us your role and preferred budget. The finder matches those choices against tool categories and returns a focused recommendation stack.</p>
-            <Button to="/ai-finder" variant="primary" size="lg" icon={Sparkles} iconPosition="left">Build my AI stack</Button>
+            <span className="directory-eyebrow"><WandSparkles size={14} /> AI Tool Finder</span>
+            <h2>Build the right AI software stack in minutes.</h2>
+            <p>Choose your role and budget to get a focused shortlist of tools for your day-to-day work and business goals.</p>
+            <Button to="/ai-finder" variant="primary" size="lg" icon={Sparkles} iconPosition="left">Find tools for me</Button>
           </div>
           <div className="home-finder-preview" aria-label="AI Finder preview">
-            <div><span>1</span><p><strong>Select your role</strong><small>Developer, marketer, creator or founder</small></p></div>
-            <div><span>2</span><p><strong>Choose your budget</strong><small>Free, freemium or paid products</small></p></div>
-            <div><span>3</span><p><strong>Review your matches</strong><small>See tools aligned with your workflow</small></p></div>
+            <div><span>1</span><p><strong>Select your role</strong><small>Developer, marketer, creator, founder or researcher</small></p></div>
+            <div><span>2</span><p><strong>Choose your budget</strong><small>Free, freemium, trial or paid software</small></p></div>
+            <div><span>3</span><p><strong>Compare your matches</strong><small>Review tools aligned with your workflow</small></p></div>
           </div>
         </div>
       </section>
 
       <section className="section directory-section directory-section-alt home-guides-section">
         <div className="container">
-          <SectionHeader label="Learn before you choose" title="Expert reviews and practical guides" description="Understand the trade-offs, pricing and best-fit workflows behind popular AI products." to="/reviews" action="View all guides" />
+          <SectionHeader label="Make a confident choice" title="Independent guides and AI tool comparisons" description="Understand features, pricing, privacy considerations and workflow fit before choosing software." to="/reviews" action="View all guides" />
           <div className="home-guide-grid">
             <Link to="/reviews" className="home-guide-card">
               <div className="home-guide-card-top"><i><ClipboardCheck size={23} /></i><small>01</small></div>
-              <span>Buying guide</span><h3>How to evaluate an AI tool before paying</h3><p>Use a practical checklist covering output quality, privacy, pricing and workflow fit.</p><b>Read the guide <ArrowRight size={16} /></b>
+              <span>Buying guide</span><h3>How to choose AI software for work</h3><p>Use a practical checklist covering output quality, privacy, pricing, support and workflow fit.</p><b>Read the guide <ArrowRight size={16} /></b>
             </Link>
             <Link to="/compare" className="home-guide-card">
               <div className="home-guide-card-top"><i><LayoutGrid size={23} /></i><small>02</small></div>
-              <span>Comparison</span><h3>Compare features, pricing and limitations</h3><p>Review popular tools side by side instead of relying on marketing claims alone.</p><b>Explore comparisons <ArrowRight size={16} /></b>
+              <span>Comparison</span><h3>Compare features, pricing and limitations</h3><p>Review leading tools side by side and look beyond product marketing claims.</p><b>Explore comparisons <ArrowRight size={16} /></b>
             </Link>
             <Link to="/free-ai-tools" className="home-guide-card">
               <div className="home-guide-card-top"><i><Sparkles size={23} /></i><small>03</small></div>
-              <span>Free tools</span><h3>Find useful AI software with a free plan</h3><p>Browse free and freemium options across development, content, research and design.</p><b>Browse free tools <ArrowRight size={16} /></b>
+              <span>Free tools</span><h3>Find AI software with a free plan</h3><p>Browse free and freemium options for development, content, research, marketing and design.</p><b>Browse free tools <ArrowRight size={16} /></b>
             </Link>
           </div>
         </div>
@@ -309,7 +322,7 @@ export default function HomePage() {
 
       <section className="section directory-section home-tasks-section">
         <div className="container">
-          <SectionHeader label="Browse by task" title="What do you want help with?" description="Choose a task to see tools suited to that type of work." to="/tasks" action="View all tasks" />
+          <SectionHeader label="Start with your goal" title="What do you want to achieve?" description="Choose a task to compare AI tools designed for that type of work." to="/tasks" action="View all tasks" />
           <div className="grid-tasks home-task-grid">
             {tasks.map(task => <TaskCard key={task.id} task={task} />)}
           </div>
@@ -318,7 +331,7 @@ export default function HomePage() {
 
       <section className="section directory-section home-latest-section">
         <div className="container">
-          <SectionHeader label="Recently added" title="New listings" description="New tools and product updates added to the directory." to="/new" action="View new tools" />
+          <SectionHeader label="New to the directory" title="Recently added AI tools" description="Explore new software listings and recently published product updates." to="/new" action="View new tools" />
           <div className="directory-latest-list">
             {latestTools.map(tool => (
               <Link to={`/tool/${tool.slug}`} className="directory-latest-row" key={tool.id}>
@@ -333,14 +346,47 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section className="section directory-section directory-section-alt home-fresh-section" id="fresh-updates">
+        <div className="container">
+          <SectionHeader label="Deals and launches" title="New AI launches and current software deals" description="Discover recently launched products and review current offers. Eligibility and availability may vary by region." />
+          <div className="home-fresh-grid">
+            <article className="home-fresh-panel home-deals-panel">
+              <header><span><BadgePercent size={18} /> Latest AI deals</span><Link to="/deals">View all <ArrowRight size={15} /></Link></header>
+              <div className="home-fresh-list">
+                {deals.slice(0, 3).map(deal => (
+                  <Link to={`/tool/${deal.toolSlug}`} key={deal.id}>
+                    <span><strong>{deal.toolName}</strong><small>{deal.type}</small></span>
+                    <b>{deal.discount}</b>
+                    <ArrowRight size={15} />
+                  </Link>
+                ))}
+              </div>
+            </article>
+            <article className="home-fresh-panel home-launches-panel">
+              <header><span><Rocket size={18} /> New AI launches</span><Link to="/launches">View all <ArrowRight size={15} /></Link></header>
+              <div className="home-fresh-list">
+                {launchTools.map(tool => (
+                  <Link to={`/tool/${tool.slug}`} key={tool.id}>
+                    <img src={tool.logo} alt="" loading="lazy" />
+                    <span><strong>{tool.name}</strong><small>{tool.category}</small></span>
+                    <b>{tool.pricingType}</b>
+                    <ArrowRight size={15} />
+                  </Link>
+                ))}
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
       <section className="section directory-section directory-section-alt home-review-section">
         <div className="container">
-          <SectionHeader label="Our review process" title="How we research and organize AI tools" description="A transparent workflow for useful listings, practical reviews and clearly disclosed promotions." to="/review-methodology" action="Read the full methodology" />
+          <SectionHeader label="Our review standards" title="How we review and classify AI software" description="A transparent process for accurate listings, practical evaluations and clearly disclosed promotions." to="/review-methodology" action="Read our methodology" />
           <div className="home-review-process">
-            <article><span>01</span><ClipboardCheck size={22} /><h3>Verify the product</h3><p>We check the official website, public availability, category and core product claims before a listing is published.</p></article>
-            <article><span>02</span><Camera size={22} /><h3>Review a real workflow</h3><p>Hands-on conclusions and screenshots are reserved for products the editorial team has actually tested.</p></article>
-            <article><span>03</span><BadgeCheck size={22} /><h3>Check plans and limits</h3><p>We record the pricing model, starting price, free access and important limitations that affect the buying decision.</p></article>
-            <article><span>04</span><ShieldCheck size={22} /><h3>Separate promotion</h3><p>Paid placement is visibly labeled and does not change organic rankings, comparisons or editorial conclusions.</p></article>
+            <article><span>01</span><ClipboardCheck size={22} /><h3>Confirm the product</h3><p>We check the official website, public availability, category and core product claims before publishing a listing.</p></article>
+            <article><span>02</span><Camera size={22} /><h3>Test practical workflows</h3><p>Hands-on conclusions and screenshots are published only for products the editorial team has directly tested.</p></article>
+            <article><span>03</span><BadgeCheck size={22} /><h3>Review pricing and limits</h3><p>We record free access, starting prices, trials and important plan limitations that may affect your decision.</p></article>
+            <article><span>04</span><ShieldCheck size={22} /><h3>Keep advertising separate</h3><p>Paid placement is clearly marked and never changes organic rankings, comparisons or editorial conclusions.</p></article>
           </div>
         </div>
       </section>
@@ -350,25 +396,25 @@ export default function HomePage() {
           <div className="home-about-heading">
             <span className="directory-eyebrow">About the directory</span>
             <h2>What is AI Directory?</h2>
-            <p className="home-about-kicker">A clearer way to discover, compare and choose AI software.</p>
+            <p className="home-about-kicker">A practical way for professionals and businesses to compare AI software.</p>
             <div className="home-about-highlights">
-              <div><ShieldCheck size={20} /><span><strong>Independent by design</strong><small>Paid placement never changes organic rankings.</small></span></div>
-              <div><ClipboardCheck size={20} /><span><strong>Structured for decisions</strong><small>Tools are organized by task, use case and pricing.</small></span></div>
+              <div><ShieldCheck size={20} /><span><strong>Independent by design</strong><small>Paid promotion never changes organic results.</small></span></div>
+              <div><ClipboardCheck size={20} /><span><strong>Built for comparison</strong><small>Compare tools by task, role, use case and pricing.</small></span></div>
             </div>
           </div>
           <div className="home-about-copy">
-            <span className="home-about-copy-label"><Sparkles size={15} /> Built for better software choices</span>
-            <p>AI Directory is an independent discovery and comparison platform for people choosing software for coding, content, design, research, marketing and automation.</p>
-            <p>Listings are organized by task, category, profession and pricing model. Product information may come from official sources or founder submissions; hands-on editorial conclusions are presented separately and only when supported by direct review.</p>
-            <p>Pricing and features can change, so important commercial details should always be confirmed on the provider's official website before purchase.</p>
-            <div className="home-about-actions"><Link to="/about">About AI Directory <ArrowRight size={15} /></Link><Link to="/contact">Suggest a correction <ArrowRight size={15} /></Link></div>
+            <span className="home-about-copy-label"><Sparkles size={15} /> Better software decisions</span>
+            <p>AI Directory is an independent discovery and comparison platform for professionals, freelancers and businesses in the United States, United Kingdom and other English-speaking markets.</p>
+            <p>Listings are grouped by task, category, role and pricing model. Product details may come from official sources or founder submissions; hands-on editorial conclusions are published separately and only when supported by direct testing.</p>
+            <p>Features, regional availability and prices in US dollars or pounds sterling can change. Always confirm current commercial terms on the provider's official website before purchasing.</p>
+            <div className="home-about-actions"><Link to="/about">Learn about our standards <ArrowRight size={15} /></Link><Link to="/contact">Suggest a correction <ArrowRight size={15} /></Link></div>
           </div>
         </div>
       </section>
 
       <section className="section directory-section home-comparison-section">
         <div className="container">
-          <SectionHeader label="Compare" title="Compare popular tools" description="Review the main differences before choosing a product." to="/compare" action="All comparisons" />
+          <SectionHeader label="Compare AI software" title="Compare leading AI tools side by side" description="Review features, pricing, strengths and limitations before choosing a product." to="/compare" action="View all comparisons" />
           <div className="directory-comparison-grid">
             {comparisons.slice(0, 4).map(item => (
               <Link to={`/compare/${item.slug}`} className="directory-comparison-card" key={item.id}>
@@ -385,14 +431,14 @@ export default function HomePage() {
       <section className="section directory-section directory-faq-section">
         <div className="container directory-faq-layout">
           <div className="directory-faq-intro">
-            <span className="directory-eyebrow">Helpful answers</span>
-            <h2>FAQs about AI Directory</h2>
-            <p>Everything you need to know about finding, comparing, and submitting AI tools.</p>
+            <span className="directory-eyebrow">Common questions</span>
+            <h2>Questions about choosing AI tools</h2>
+            <p>Clear answers about comparing software, checking prices and finding free AI tools.</p>
             <div className="directory-faq-visual" aria-hidden="true">
               <div className="directory-faq-visual-top"><i /><i /><i /></div>
               <div className="directory-faq-visual-body">
                 <span className="directory-faq-visual-icon"><CircleHelp size={40} /></span>
-                <div><b>How can we help?</b><small>Clear answers for smarter choices.</small></div>
+                <div><b>Need help choosing?</b><small>Practical answers for better software decisions.</small></div>
                 <span className="directory-faq-visual-line is-wide" />
                 <span className="directory-faq-visual-line" />
                 <span className="directory-faq-visual-line is-short" />
@@ -400,12 +446,12 @@ export default function HomePage() {
             </div>
           </div>
           <div className="directory-faq-list">
-            <details open><summary>What is an AI tools directory?</summary><p>An AI tools directory organizes software by task, category, pricing and use case so people can discover and compare relevant products in one place.</p></details>
-            <details><summary>How are tools organized?</summary><p>Tools are grouped by category, task, pricing and listing relevance. Dedicated pages help users compare products for a specific workflow.</p></details>
-            <details><summary>Does payment improve organic ranking?</summary><p>No. Sponsored placements are labeled and kept separate from organic listings.</p></details>
-            <details><summary>Can I find free tools?</summary><p>Yes. Use the Free Tools page or pricing filters to find free and freemium products.</p></details>
-            <details><summary>How often are listings updated?</summary><p>Listings are reviewed as product information changes. Recently added and updated products are surfaced separately for easier discovery.</p></details>
-            <details><summary>How do I submit a tool?</summary><p>Use the submission form. A standard listing can be submitted without a listing fee.</p></details>
+            <details open><summary>What is an AI tools directory?</summary><p>An AI tools directory groups software by task, category, pricing and use case so you can discover and compare relevant products in one place.</p></details>
+            <details><summary>How should I compare AI tools?</summary><p>Compare the features you need, total subscription cost, free-plan limits, privacy terms, support and fit with your existing workflow.</p></details>
+            <details><summary>Does payment improve organic ranking?</summary><p>No. Sponsored placements are clearly marked and kept separate from organic listings and editorial conclusions.</p></details>
+            <details><summary>Can I find free AI tools?</summary><p>Yes. Use the pricing filters or Free Tools page to compare products with free or freemium access.</p></details>
+            <details><summary>Are prices available in USD and GBP?</summary><p>Providers may display prices in US dollars, pounds sterling or local currency. Confirm taxes, exchange rates and regional availability on the official product website.</p></details>
+            <details><summary>How often are listings updated?</summary><p>Listings are reviewed when product information changes, and recently added tools are displayed separately for easier discovery.</p></details>
           </div>
         </div>
       </section>
@@ -431,7 +477,7 @@ function SectionHeader({ label, title, description, to, action }) {
   return (
     <div className="directory-section-head">
       <div><span>{label}</span><h2>{title}</h2><p>{description}</p></div>
-      <Link to={to}>{action}<ArrowRight size={15} /></Link>
+      {to && action && <Link to={to}>{action}<ArrowRight size={15} /></Link>}
     </div>
   );
 }

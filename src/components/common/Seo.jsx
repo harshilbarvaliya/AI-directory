@@ -4,7 +4,7 @@ import { tools, categories, tasks, comparisons } from '../../data/mockData';
 
 const SITE = 'https://harshilbarvaliya.github.io/AI-directory';
 const staticSeo = {
-  '/': ['AI Directory: Find and Compare AI Tools by Task', 'Discover AI tools by task, category, features and pricing. Compare options, explore alternatives and choose tools that fit your workflow.'],
+  '/': ['Find and Compare AI Tools for Work | AI Directory', 'Compare AI software for coding, writing, marketing, design, research and business. Explore features, pricing, free plans and practical limitations.'],
   '/tools': ['All AI Tools: Search, Filter and Compare | AI Directory', 'Browse AI tools for coding, writing, image creation, research, marketing, audio and video. Filter by category and pricing model.'],
   '/categories': ['AI Tool Categories for Work and Creative Tasks | AI Directory', 'Explore AI software categories including coding, writing, design, video, research, marketing, customer support and music.'],
   '/tasks': ['Best AI Tools by Task and Use Case | AI Directory', 'Find AI tools for specific tasks such as coding, SEO writing, product images, voiceovers, research and video editing.'],

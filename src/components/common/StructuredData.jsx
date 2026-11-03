@@ -5,12 +5,12 @@ import { tools, categories, tasks, comparisons } from '../../data/mockData';
 const SITE_URL = 'https://harshilbarvaliya.github.io/AI-directory';
 const absolute = (path = '/') => `${SITE_URL}${path === '/' ? '/' : path}`;
 const homeFaq = [
-  ['What is an AI tools directory?', 'An AI tools directory organizes software by task, category, pricing and use case so people can discover and compare relevant products in one place.'],
-  ['How are tools organized?', 'Tools are grouped by category, task, pricing and listing relevance. Dedicated pages help users compare products for a specific workflow.'],
-  ['Does payment improve organic ranking?', 'No. Sponsored placements are labeled and kept separate from organic listings.'],
-  ['Can I find free tools?', 'Yes. Use the Free Tools page or pricing filters to find free and freemium products.'],
-  ['How often are listings updated?', 'Listings are reviewed as product information changes. Recently added and updated products are surfaced separately for easier discovery.'],
-  ['How do I submit a tool?', 'Use the submission form. A standard listing can be submitted without a listing fee.']
+  ['What is an AI tools directory?', 'An AI tools directory groups software by task, category, pricing and use case so you can discover and compare relevant products in one place.'],
+  ['How should I compare AI tools?', 'Compare the features you need, total subscription cost, free-plan limits, privacy terms, support and fit with your existing workflow.'],
+  ['Does payment improve organic ranking?', 'No. Sponsored placements are clearly marked and kept separate from organic listings and editorial conclusions.'],
+  ['Can I find free AI tools?', 'Yes. Use the pricing filters or Free Tools page to compare products with free or freemium access.'],
+  ['Are prices available in USD and GBP?', 'Providers may display prices in US dollars, pounds sterling or local currency. Confirm taxes, exchange rates and regional availability on the official product website.'],
+  ['How often are listings updated?', 'Listings are reviewed when product information changes, and recently added tools are displayed separately for easier discovery.']
 ];
 
 function breadcrumbSchema(pathname, currentName) {
@@ -53,7 +53,7 @@ export default function StructuredData() {
 
     if (pathname === '/') {
       graph.push(
-        { '@type': 'Organization', '@id': `${SITE_URL}/#organization`, name: 'AI Directory', url: absolute('/'), description: 'An independent directory for discovering and comparing AI tools.' },
+        { '@type': 'Organization', '@id': `${SITE_URL}/#organization`, name: 'AI Directory', url: absolute('/'), description: 'An independent directory for professionals and businesses discovering and comparing AI software.' },
         { '@type': 'WebSite', '@id': `${SITE_URL}/#website`, name: 'AI Directory', url: absolute('/'), publisher: { '@id': `${SITE_URL}/#organization` }, inLanguage: 'en' },
         {
           '@type': 'ItemList',
