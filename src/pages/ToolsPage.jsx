@@ -38,6 +38,7 @@ export default function ToolsPage() {
 
       {/* Filter & Sort Controls */}
       <div
+        className="directory-filter-panel"
         style={{
           display: 'flex',
           alignItems: 'center',
@@ -68,7 +69,7 @@ export default function ToolsPage() {
           >
             All Categories ({tools.length})
           </button>
-          {categories.map(cat => (
+          {categories.filter(cat => tools.some(tool => tool.categorySlug === cat.slug)).map(cat => (
             <button
               key={cat.id}
               onClick={() => setSelectedCategory(cat.slug)}

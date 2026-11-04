@@ -23,7 +23,7 @@ export default function TaskDetailPage() {
       </div>
 
       {/* Task Hero */}
-      <div style={{ marginBottom: '3rem', padding: '2.5rem', background: 'rgba(18, 20, 30, 0.7)', border: '1px solid rgba(255, 255, 255, 0.08)', borderRadius: '20px' }}>
+      <div className="page-feature-hero">
         <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', color: '#22d3ee', fontSize: '0.8125rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '0.5rem' }}>
           <Cpu size={14} />
           Workflow Guide

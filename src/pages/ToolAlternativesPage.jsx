@@ -27,9 +27,6 @@ export default function ToolAlternativesPage() {
         <span style={{ color: '#f8fafc' }}>{targetTool.name} Alternatives</span>
       </div>
 
-      <section className="content-section"><h2>Why are you switching?</h2><div style={{display:'flex',gap:'.5rem',flexWrap:'wrap'}}>{['Lower price','Free option','Simpler workflow','More features','Better privacy'].map(x=><button onClick={() => setReason(x)} className={`btn btn-sm ${reason === x ? 'btn-primary' : 'btn-secondary'}`} key={x}>{x}</button>)}</div></section>
-      <section className="content-section"><h2>Top picks</h2><div className="simple-grid"><div className="simple-panel"><h3>Best overall</h3><p>{alternatives[0]?.name}. A strong general-purpose fit.</p></div><div className="simple-panel"><h3>Best free</h3><p>{alternatives.find(x=>x.pricingType==='Free')?.name || alternatives.find(x=>x.pricingType==='Freemium')?.name}. A useful entry point with a free option.</p></div><div className="simple-panel"><h3>Best budget</h3><p>{alternatives.find(x=>x.startingPrice.includes('$5'))?.name || alternatives[1]?.name}. A lower starting cost.</p></div></div></section>
-
       <div className="page-hero">
         <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', color: '#06b6d4', fontSize: '0.8125rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '0.5rem' }}>
           <Zap size={14} />
@@ -40,6 +37,9 @@ export default function ToolAlternativesPage() {
           Looking for better pricing, self-hosting options, or specialized features? Explore the top verified alternatives to {targetTool.name}.
         </p>
       </div>
+
+      <section className="content-section alternatives-reason-section"><h2>Why are you switching?</h2><p className="content-section-intro">Choose the main reason so the shortlist prioritises the right trade-off.</p><div className="choice-chip-row">{['Lower price','Free option','Simpler workflow','More features','Better privacy'].map(x=><button onClick={() => setReason(x)} className={`btn btn-sm ${reason === x ? 'btn-primary' : 'btn-secondary'}`} key={x}>{x}</button>)}</div></section>
+      <section className="content-section"><h2>Top picks for your shortlist</h2><div className="simple-grid"><div className="simple-panel"><h3>Best overall</h3><p>{alternatives[0]?.name}. A strong general-purpose fit.</p></div><div className="simple-panel"><h3>Best free</h3><p>{alternatives.find(x=>x.pricingType==='Free')?.name || alternatives.find(x=>x.pricingType==='Freemium')?.name}. A useful entry point with a free option.</p></div><div className="simple-panel"><h3>Best budget</h3><p>{alternatives.find(x=>x.startingPrice.includes('$5'))?.name || alternatives[1]?.name}. A lower starting cost.</p></div></div></section>
 
       <div className="grid-tools">
         {rankedAlternatives.map(tool => (

@@ -16,7 +16,7 @@ export default function GenericInfoPage({ title, tag, subtitle, content, ctaText
         {subtitle && <p className="page-hero-desc">{subtitle}</p>}
       </div>
 
-      <div className="glass-card" style={{ padding: '2.5rem', borderRadius: '24px', display: 'flex', flexDirection: 'column', gap: '1.5rem', color: '#cbd5e1', fontSize: '0.9375rem', lineHeight: '1.7' }}>
+      <div className="glass-card policy-content-card" style={{ padding: '2.5rem', borderRadius: '24px', display: 'flex', flexDirection: 'column', gap: '1.5rem', color: '#cbd5e1', fontSize: '0.9375rem', lineHeight: '1.7' }}>
         {content}
 
         {ctaText && ctaLink && (

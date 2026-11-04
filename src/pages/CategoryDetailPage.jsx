@@ -21,7 +21,7 @@ export default function CategoryDetailPage() {
       </div>
 
       {/* Category Hero */}
-      <div style={{ marginBottom: '3rem', padding: '2.5rem', background: 'rgba(18, 20, 30, 0.7)', border: '1px solid rgba(255, 255, 255, 0.08)', borderRadius: '20px' }}>
+      <div className="page-feature-hero">
         <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', color: category.color || '#818cf8', fontSize: '0.8125rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '0.5rem' }}>
           <Sparkles size={14} />
           Category Spotlight
@@ -59,10 +59,11 @@ export default function CategoryDetailPage() {
           ))}
         </div>
       ) : (
-        <div className="grid-tools">
-          {tools.slice(0, 3).map(tool => (
-            <ToolCard key={tool.id} tool={tool} />
-          ))}
+        <div className="category-awaiting-listings">
+          <Sparkles size={26} />
+          <h3>This category is open for new listings</h3>
+          <p>We have not published a reviewed product in this category yet. Browse the full directory or submit a relevant tool for consideration.</p>
+          <div><Link className="btn btn-secondary" to="/tools">Browse all tools</Link><Link className="btn btn-primary" to="/submit">Submit a tool</Link></div>
         </div>
       )}
       <section className="content-section"><h2>Browse and compare</h2><div className="simple-grid">

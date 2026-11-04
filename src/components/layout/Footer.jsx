@@ -13,6 +13,7 @@ const groups = [
 
 export default function Footer({ cta = defaultFooterCta }) {
   const ctaContent = { ...defaultFooterCta, ...cta };
+  const footerRef = React.useRef(null);
   const pointerFrame = React.useRef(null);
   const pointerEffectsEnabled = React.useRef(false);
 
@@ -25,6 +26,20 @@ export default function Footer({ cta = defaultFooterCta }) {
       pointerQuery.removeEventListener('change', updatePointerMode);
       if (pointerFrame.current) window.cancelAnimationFrame(pointerFrame.current);
     };
+  }, []);
+
+  React.useEffect(() => {
+    const footer = footerRef.current;
+    if (!footer || !('IntersectionObserver' in window)) {
+      footer?.classList.add('effects-in-view');
+      return undefined;
+    }
+
+    const observer = new IntersectionObserver(([entry]) => {
+      footer.classList.toggle('effects-in-view', entry.isIntersecting);
+    }, { rootMargin: '320px 0px' });
+    observer.observe(footer);
+    return () => observer.disconnect();
   }, []);
 
   const handlePointerMove = (event) => {
@@ -55,7 +70,7 @@ export default function Footer({ cta = defaultFooterCta }) {
   };
 
   return (
-    <footer className="classic-footer directory-home" onPointerMove={handlePointerMove} onPointerLeave={handlePointerLeave}>
+    <footer ref={footerRef} id="site-footer" className="classic-footer directory-home" onPointerMove={handlePointerMove} onPointerLeave={handlePointerLeave}>
       <div className="footer-clone-field" aria-hidden="true">
         <span className="section-clone section-clone-1" />
         <span className="section-clone section-clone-2" />
@@ -116,7 +131,7 @@ export default function Footer({ cta = defaultFooterCta }) {
               height="683"
               loading="lazy"
               decoding="async"
-              fetchpriority="low"
+              fetchPriority="low"
             />
             <svg className="footer-data-flow" viewBox="0 0 2048 683" preserveAspectRatio="none" aria-hidden="true">
               <g className="footer-network-packet footer-network-packet-1"><circle cx="282" cy="460" r="5" /><circle cx="282" cy="460" r="11" /></g>

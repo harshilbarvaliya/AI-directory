@@ -18,6 +18,8 @@ const AiFinderPage = lazy(() => import('./pages/AiFinderPage'));
 const DealsPage = lazy(() => import('./pages/DealsPage'));
 const LaunchesPage = lazy(() => import('./pages/LaunchesPage'));
 const ReviewsPage = lazy(() => import('./pages/ReviewsPage'));
+const BlogPage = lazy(() => import('./pages/BlogPage'));
+const BlogArticlePage = lazy(() => import('./pages/BlogArticlePage'));
 const FreeToolsPage = lazy(() => import('./pages/FreeToolsPage'));
 const TrendingPage = lazy(() => import('./pages/TrendingPage'));
 const NewToolsPage = lazy(() => import('./pages/NewToolsPage'));
@@ -87,7 +89,8 @@ export default function App() {
         <Route path="/deals" element={<DealsPage />} />
         <Route path="/launches" element={<LaunchesPage />} />
         <Route path="/reviews" element={<ReviewsPage />} />
-        <Route path="/blog" element={<ReviewsPage />} />
+        <Route path="/blog" element={<BlogPage />} />
+        <Route path="/blog/:slug" element={<BlogArticlePage />} />
 
         {/* Founder Portal */}
         <Route path="/submit" element={<SubmitPage />} />

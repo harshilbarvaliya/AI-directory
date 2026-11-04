@@ -20,15 +20,15 @@ export default function ToolVsToolPage() {
       </div>
 
       {/* Comparison Hero */}
-      <div style={{ textAlign: 'center', maxWidth: '800px', margin: '0 auto 3.5rem' }}>
+      <div className="page-hero page-feature-hero comparison-page-hero">
         <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', color: '#818cf8', fontSize: '0.8125rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: '0.5rem' }}>
           <GitCompare size={14} />
           Direct Comparison Breakdown
         </div>
-        <h1 style={{ fontSize: '2.75rem', fontWeight: '800', color: '#ffffff', marginBottom: '1rem' }}>
+        <h1 className="page-hero-title">
           {comp.toolA} <span className="text-gradient">vs</span> {comp.toolB}
         </h1>
-        <p style={{ fontSize: '1.125rem', color: '#94a3b8', lineHeight: '1.6' }}>
+        <p className="page-hero-desc">
           {comp.summary}
         </p>
       </div>
@@ -43,7 +43,7 @@ export default function ToolVsToolPage() {
           border: '1px solid rgba(255, 255, 255, 0.1)'
         }}
       >
-        <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
+        <table className="data-table comparison-matrix">
           <thead>
             <tr style={{ background: 'rgba(255, 255, 255, 0.04)', borderBottom: '1px solid rgba(255, 255, 255, 0.1)' }}>
               <th style={{ padding: '1.5rem', fontSize: '1rem', color: '#64748b', width: '30%' }}>Feature / Dimension</th>

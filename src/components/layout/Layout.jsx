@@ -3,6 +3,7 @@ import Header from './Header';
 import Footer from './Footer';
 import Seo from '../common/Seo';
 import StructuredData from '../common/StructuredData';
+import PageSupportSection from '../common/PageSupportSection';
 import { useLocation } from 'react-router-dom';
 import { getFooterCta } from '../../data/footerCta';
 
@@ -15,6 +16,8 @@ export default function Layout({ children }) {
     compact: window.matchMedia('(max-width: 767px), (prefers-reduced-motion: reduce)').matches,
     pointer: window.matchMedia('(pointer: fine) and (prefers-reduced-motion: no-preference)').matches
   }));
+  const bandCount = effectMode.compact ? 2 : 4;
+  const bubblesPerBand = effectMode.compact ? 3 : 6;
 
   React.useEffect(() => {
     const compactQuery = window.matchMedia('(max-width: 767px), (prefers-reduced-motion: reduce)');
@@ -31,6 +34,20 @@ export default function Layout({ children }) {
       if (pointerFrame.current) window.cancelAnimationFrame(pointerFrame.current);
     };
   }, []);
+
+  React.useEffect(() => {
+    const fields = document.querySelectorAll('.site-page-bubble-field');
+    if (!fields.length || !('IntersectionObserver' in window)) return undefined;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        entry.target.classList.toggle('effects-in-view', entry.isIntersecting);
+      });
+    }, { rootMargin: '300px 0px' });
+
+    fields.forEach((field) => observer.observe(field));
+    return () => observer.disconnect();
+  }, [pathname, bandCount]);
 
   const handlePointerMove = (event) => {
     if (isAdmin || pathname === '/' || !effectMode.pointer) return;
@@ -55,16 +72,14 @@ export default function Layout({ children }) {
     event.currentTarget.classList.remove('site-global-pointer-active');
   };
 
-  const bandCount = effectMode.compact ? 2 : 4;
-  const bubblesPerBand = effectMode.compact ? 3 : 6;
-
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', width: '100%' }}>
       <Seo />
       <StructuredData />
       {!isAdmin && <Header />}
       <main
-        className={`site-main-canvas${isAdmin ? '' : ' site-global-effects-zone'}`}
+        className={`site-main-canvas${isAdmin ? '' : ' site-global-effects-zone public-site-main'}`}
+        data-route={pathname}
         style={{ flex: 1, width: '100%' }}
         onPointerMove={handlePointerMove}
         onPointerLeave={handlePointerLeave}
@@ -93,6 +108,7 @@ export default function Layout({ children }) {
           </div>
         )}
         {children}
+        {!isAdmin && <PageSupportSection pathname={pathname} />}
       </main>
       {!isAdmin && <Footer cta={footerCta} />}
     </div>

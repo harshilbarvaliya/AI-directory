@@ -3,7 +3,7 @@
 export const categories = [
   {
     id: "coding-dev",
-    name: "Coding & Development",
+    name: "Coding & Developer Tools",
     slug: "coding-dev",
     icon: "Code",
     color: "#6366f1",
@@ -13,7 +13,7 @@ export const categories = [
   },
   {
     id: "content-writing",
-    name: "Content & Copywriting",
+    name: "Writing & Content",
     slug: "content-writing",
     icon: "FileText",
     color: "#8b5cf6",
@@ -23,7 +23,7 @@ export const categories = [
   },
   {
     id: "image-design",
-    name: "Image & Graphic Design",
+    name: "Image Generation & Design",
     slug: "image-design",
     icon: "Image",
     color: "#ec4899",
@@ -33,7 +33,7 @@ export const categories = [
   },
   {
     id: "video-voice",
-    name: "Video & Voice AI",
+    name: "Video, Voice & Animation",
     slug: "video-voice",
     icon: "Video",
     color: "#f43f5e",
@@ -43,7 +43,7 @@ export const categories = [
   },
   {
     id: "productivity-search",
-    name: "Productivity & Research",
+    name: "Productivity, Research & Search",
     slug: "productivity-search",
     icon: "Compass",
     color: "#06b6d4",
@@ -53,7 +53,7 @@ export const categories = [
   },
   {
     id: "marketing-seo",
-    name: "Marketing & Growth",
+    name: "SEO & Marketing",
     slug: "marketing-seo",
     icon: "TrendingUp",
     color: "#10b981",
@@ -63,7 +63,7 @@ export const categories = [
   },
   {
     id: "customer-support",
-    name: "Customer Support & Agents",
+    name: "Sales & Customer Support",
     slug: "customer-support",
     icon: "MessageSquare",
     color: "#f59e0b",
@@ -73,13 +73,223 @@ export const categories = [
   },
   {
     id: "audio-music",
-    name: "Audio & Music Generation",
+    name: "Audio & Music",
     slug: "audio-music",
     icon: "Headphones",
     color: "#3b82f6",
     count: 54,
     description: "Music production, noise suppression, stem separation, and audio restoration.",
-    popularTasks: ["Background music", "Audio mastering", "Podcast cleanup", "Sound effects"]
+    popularTasks: ["Music generation", "Text to speech", "Audio editing", "Podcast tools"]
+  },
+  {
+    id: "social-media",
+    name: "Social Media",
+    slug: "social-media",
+    icon: "Share2",
+    color: "#ec4899",
+    count: 0,
+    description: "Content planning, post creation, scheduling, analytics and influencer workflow tools.",
+    popularTasks: ["Posts & captions", "Social scheduling", "Social analytics", "Influencer tools"]
+  },
+  {
+    id: "email-outreach",
+    name: "Email & Outreach",
+    slug: "email-outreach",
+    icon: "Mail",
+    color: "#f97316",
+    count: 0,
+    description: "AI tools for email writing, inbox workflows, cold outreach and campaign operations.",
+    popularTasks: ["Email writing", "Inbox management", "Cold outreach", "Email marketing"]
+  },
+  {
+    id: "ai-detection",
+    name: "AI Detection & Content",
+    slug: "ai-detection-content",
+    icon: "ShieldCheck",
+    color: "#8b5cf6",
+    count: 0,
+    description: "AI-content detection, humanisation, plagiarism review and fact-checking software.",
+    popularTasks: ["AI content detection", "Content humanisation", "Plagiarism checking", "Fact checking"]
+  },
+  {
+    id: "design-branding",
+    name: "Design & Branding",
+    slug: "design-branding",
+    icon: "Palette",
+    color: "#d946ef",
+    count: 0,
+    description: "Brand identity, graphic design, templates, typography and collaborative design tools.",
+    popularTasks: ["Logo design", "Graphic design", "Brand assets", "UI & UX design"]
+  },
+  {
+    id: "photo-editing",
+    name: "Photo Editing & Avatars",
+    slug: "photo-editing-avatars",
+    icon: "ScanFace",
+    color: "#e879f9",
+    count: 0,
+    description: "Enhancement, background removal, image upscaling, headshots and avatar creation.",
+    popularTasks: ["Photo enhancement", "Background removal", "Image upscaling", "AI avatars"]
+  },
+  {
+    id: "meetings-transcription",
+    name: "Meetings & Transcription",
+    slug: "meetings-transcription",
+    icon: "Mic2",
+    color: "#06b6d4",
+    count: 0,
+    description: "Record, transcribe, summarise and organise meetings and spoken conversations.",
+    popularTasks: ["Speech to text", "Meeting notes", "Meeting summaries", "Meeting assistants"]
+  },
+  {
+    id: "website-builders",
+    name: "Website & App Builders",
+    slug: "website-app-builders",
+    icon: "PanelsTopLeft",
+    color: "#3b82f6",
+    count: 0,
+    description: "Website, landing page, mobile and web application builders powered by AI.",
+    popularTasks: ["Website builders", "Landing pages", "Mobile apps", "No-code development"]
+  },
+  {
+    id: "automation-agents",
+    name: "Automation & AI Agents",
+    slug: "automation-ai-agents",
+    icon: "Workflow",
+    color: "#22c55e",
+    count: 0,
+    description: "Workflow automation, browser agents, desktop agents and multi-agent platforms.",
+    popularTasks: ["Workflow automation", "Browser agents", "Agent builders", "App integrations"]
+  },
+  {
+    id: "data-analytics",
+    name: "Data & Analytics",
+    slug: "data-analytics",
+    icon: "ChartNoAxesCombined",
+    color: "#0ea5e9",
+    count: 0,
+    description: "Data analysis, visualisation, extraction, reporting and spreadsheet assistance.",
+    popularTasks: ["Data analysis", "Data visualisation", "Dashboards", "Web scraping"]
+  },
+  {
+    id: "chatbots-assistants",
+    name: "Chatbots & AI Assistants",
+    slug: "chatbots-ai-assistants",
+    icon: "MessagesSquare",
+    color: "#10b981",
+    count: 0,
+    description: "General assistants, custom chatbots, AI companions and conversational agents.",
+    popularTasks: ["General assistants", "Custom chatbots", "AI search engines", "Personal assistants"]
+  },
+  {
+    id: "presentations",
+    name: "Presentations",
+    slug: "presentations",
+    icon: "Presentation",
+    color: "#f97316",
+    count: 0,
+    description: "Slide generation, pitch decks, presentation design and team collaboration tools.",
+    popularTasks: ["Slide generation", "Pitch decks", "Presentation design", "Text to slides"]
+  },
+  {
+    id: "business-hr",
+    name: "Business & HR",
+    slug: "business-hr",
+    icon: "UsersRound",
+    color: "#a855f7",
+    count: 0,
+    description: "Planning, recruiting, HR operations, procurement and career workflow software.",
+    popularTasks: ["Business planning", "Recruiting", "HR operations", "Career tools"]
+  },
+  {
+    id: "finance-accounting",
+    name: "Finance & Accounting",
+    slug: "finance-accounting",
+    icon: "CircleDollarSign",
+    color: "#22c55e",
+    count: 0,
+    description: "Bookkeeping, invoicing, expense management, budgeting and financial analysis tools.",
+    popularTasks: ["Bookkeeping", "Invoicing", "Expense management", "Financial analysis"]
+  },
+  {
+    id: "legal-contracts",
+    name: "Legal & Contracts",
+    slug: "legal-contracts",
+    icon: "Scale",
+    color: "#f59e0b",
+    count: 0,
+    description: "Legal research, contract drafting, review and document management assistance.",
+    popularTasks: ["Legal research", "Contract drafting", "Contract review", "Document management"]
+  },
+  {
+    id: "ecommerce",
+    name: "E-commerce",
+    slug: "ecommerce",
+    icon: "ShoppingBag",
+    color: "#ec4899",
+    count: 0,
+    description: "Product content, photography, merchandising and shopping-assistant software.",
+    popularTasks: ["Product descriptions", "Product photography", "Shopping assistants", "Store management"]
+  },
+  {
+    id: "education-learning",
+    name: "Education & Learning",
+    slug: "education-learning",
+    icon: "GraduationCap",
+    color: "#6366f1",
+    count: 0,
+    description: "AI tutors, language learning, exam preparation and course-creation platforms.",
+    popularTasks: ["AI tutors", "Language learning", "Exam preparation", "Course creation"]
+  },
+  {
+    id: "gaming-3d",
+    name: "3D & Gaming",
+    slug: "3d-gaming",
+    icon: "Gamepad2",
+    color: "#8b5cf6",
+    count: 0,
+    description: "3D model generation, textures, animation and game-development assistance.",
+    popularTasks: ["3D models", "3D textures", "Game development", "Game assets"]
+  },
+  {
+    id: "lifestyle-entertainment",
+    name: "Lifestyle & Entertainment",
+    slug: "lifestyle-entertainment",
+    icon: "Heart",
+    color: "#fb7185",
+    count: 0,
+    description: "Travel, fitness, meal planning, gift ideas and everyday entertainment tools.",
+    popularTasks: ["Travel planning", "Fitness planning", "Meal planning", "Gift ideas"]
+  },
+  {
+    id: "healthcare-wellness",
+    name: "Healthcare & Wellness",
+    slug: "healthcare-wellness",
+    icon: "HeartPulse",
+    color: "#ef4444",
+    count: 0,
+    description: "Clinical documentation, medical research and healthcare administration tools.",
+    popularTasks: ["Clinical documentation", "Medical research", "Healthcare administration", "Wellness"]
+  },
+  {
+    id: "ai-security",
+    name: "AI Security & Governance",
+    slug: "ai-security-governance",
+    icon: "Shield",
+    color: "#0f766e",
+    count: 0,
+    description: "AI governance, model monitoring, access policies and security assessment tools.",
+    popularTasks: ["AI governance", "Model monitoring", "Risk assessment", "Policy management"]
+  },
+  {
+    id: "localization",
+    name: "Translation & Localisation",
+    slug: "translation-localisation",
+    icon: "Languages",
+    color: "#0284c7",
+    count: 0,
+    description: "Translation, dubbing, transcription and localisation workflows for global teams.",
+    popularTasks: ["Translation", "Website localisation", "Dubbing", "Subtitle translation"]
   }
 ];
 

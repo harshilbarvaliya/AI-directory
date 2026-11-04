@@ -58,8 +58,14 @@ export default function HomePage() {
     if (!pointerQuery.matches) return undefined;
     const sections = document.querySelectorAll('.home-page.directory-home section:not(.interactive-hero)');
     const cleanups = [];
+    const effectsObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        entry.target.classList.toggle('effects-in-view', entry.isIntersecting);
+      });
+    }, { rootMargin: '260px 0px' });
     sections.forEach(section => {
       section.classList.add('section-jelly-zone');
+      effectsObserver.observe(section);
       const field = document.createElement('div');
       field.className = 'section-clone-field';
       field.setAttribute('aria-hidden', 'true');
@@ -97,7 +103,10 @@ export default function HomePage() {
         field.remove();
       });
     });
-    return () => cleanups.forEach(cleanup => cleanup());
+    return () => {
+      effectsObserver.disconnect();
+      cleanups.forEach(cleanup => cleanup());
+    };
   }, []);
 
   useEffect(() => {

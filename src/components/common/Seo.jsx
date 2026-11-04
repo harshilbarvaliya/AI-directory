@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { tools, categories, tasks, comparisons } from '../../data/mockData';
+import { getBlogArticle } from '../../data/blogData';
 
 const SITE = 'https://harshilbarvaliya.github.io/AI-directory';
 const staticSeo = {
@@ -15,6 +16,7 @@ const staticSeo = {
   '/trending': ['Trending AI Tools to Explore | AI Directory', 'Explore AI tools currently highlighted across coding, research, creative work, productivity and business workflows.'],
   '/new': ['New AI Tools and Product Launches | AI Directory', 'Discover recently added AI tools, product launches and emerging software across popular AI categories.'],
   '/deals': ['AI Tool Deals, Discounts and Free Trials | AI Directory', 'Explore clearly disclosed AI software deals, discounts and extended trials. Confirm eligibility and current terms with each provider.'],
+  '/blog': ['AI Tool Guides, Comparisons and Practical Workflows', 'Read independent AI software buying guides, practical comparisons and useful workflows for teams and individuals in the UK, US and beyond.'],
   '/submit': ['Submit an AI Tool to AI Directory', 'Submit your AI product for editorial review. Compare free listing, fast-track review and clearly labeled promotion options.'],
   '/pricing': ['AI Tool Listing and Promotion Pricing for Founders', 'Compare founder listing, review and promotional plans. Payment never guarantees a positive review or higher organic ranking.'],
   '/ranking-methodology': ['How AI Directory Rankings Work', 'Learn how AI Directory separates organic discovery signals from paid placements and labels sponsored tools.'],
@@ -43,6 +45,9 @@ export default function Seo() {
     } else if (pathname.startsWith('/task/')) {
       const item = tasks.find(x => x.slug === pathname.split('/')[2]);
       if (item) seo = [`Best AI Tools to ${item.name}`, `Compare recommended AI tools to ${item.name.toLowerCase()}, including free options, pricing, workflow fit and selection guidance.`];
+    } else if (pathname.startsWith('/blog/')) {
+      const article = getBlogArticle(pathname.split('/')[2]);
+      if (article) seo = [`${article.title} | AI Directory`, article.excerpt];
     } else if (pathname.startsWith('/compare/')) {
       const item = comparisons.find(x => x.slug === pathname.split('/')[2]);
       if (item) seo = [`${item.toolA} vs ${item.toolB}: Features and Pricing`, `Compare ${item.toolA} and ${item.toolB} across pricing, features, strengths, limitations and best-fit use cases.`];
