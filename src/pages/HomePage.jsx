@@ -14,6 +14,7 @@ import { tools, categories, tasks, comparisons, deals } from '../data/mockData';
 
 export default function HomePage() {
   const heroRef = useRef(null);
+  const heroPointerFrame = useRef(null);
   const navigate = useNavigate();
   const popularTools = tools.slice(0, 8);
   const latestTools = tools.filter(tool => tool.new).slice(0, 4);
@@ -53,6 +54,8 @@ export default function HomePage() {
   }, []);
 
   useEffect(() => {
+    const pointerQuery = window.matchMedia('(pointer: fine) and (prefers-reduced-motion: no-preference)');
+    if (!pointerQuery.matches) return undefined;
     const sections = document.querySelectorAll('.home-page.directory-home section:not(.interactive-hero)');
     const cleanups = [];
     sections.forEach(section => {
@@ -66,13 +69,26 @@ export default function HomePage() {
         field.appendChild(clone);
       }
       section.prepend(field);
+      let pointerFrame = null;
       const move = event => {
-        const rect = section.getBoundingClientRect();
-        section.style.setProperty('--section-mouse-x', `${event.clientX - rect.left}px`);
-        section.style.setProperty('--section-mouse-y', `${event.clientY - rect.top}px`);
-        section.classList.add('section-pointer-active');
+        const clientX = event.clientX;
+        const clientY = event.clientY;
+        if (pointerFrame) window.cancelAnimationFrame(pointerFrame);
+        pointerFrame = window.requestAnimationFrame(() => {
+          const rect = section.getBoundingClientRect();
+          section.style.setProperty('--section-mouse-x', `${clientX - rect.left}px`);
+          section.style.setProperty('--section-mouse-y', `${clientY - rect.top}px`);
+          section.classList.add('section-pointer-active');
+          pointerFrame = null;
+        });
       };
-      const leave = () => section.classList.remove('section-pointer-active');
+      const leave = () => {
+        if (pointerFrame) {
+          window.cancelAnimationFrame(pointerFrame);
+          pointerFrame = null;
+        }
+        section.classList.remove('section-pointer-active');
+      };
       section.addEventListener('pointermove', move, { passive: true });
       section.addEventListener('pointerleave', leave);
       cleanups.push(() => {
@@ -84,14 +100,37 @@ export default function HomePage() {
     return () => cleanups.forEach(cleanup => cleanup());
   }, []);
 
+  useEffect(() => {
+    const hero = heroRef.current;
+    if (!hero) return undefined;
+    const setInitialPointerPosition = () => {
+      hero.style.setProperty('--mouse-x', `${hero.clientWidth / 2}px`);
+      hero.style.setProperty('--mouse-y', `${hero.clientHeight * 0.45}px`);
+    };
+    setInitialPointerPosition();
+    window.addEventListener('resize', setInitialPointerPosition, { passive: true });
+    return () => {
+      window.removeEventListener('resize', setInitialPointerPosition);
+      if (heroPointerFrame.current) window.cancelAnimationFrame(heroPointerFrame.current);
+    };
+  }, []);
+
   const moveHeroEffect = event => {
     const hero = heroRef.current;
     if (!hero) return;
-    const rect = hero.getBoundingClientRect();
-    hero.style.setProperty('--mouse-x', `${event.clientX - rect.left}px`);
-    hero.style.setProperty('--mouse-y', `${event.clientY - rect.top}px`);
-    hero.style.setProperty('--tilt-x', `${((event.clientX - rect.left) / rect.width - 0.5) * 6}px`);
-    hero.style.setProperty('--tilt-y', `${((event.clientY - rect.top) / rect.height - 0.5) * 4}px`);
+    const clientX = event.clientX;
+    const clientY = event.clientY;
+    if (heroPointerFrame.current) window.cancelAnimationFrame(heroPointerFrame.current);
+    heroPointerFrame.current = window.requestAnimationFrame(() => {
+      const rect = hero.getBoundingClientRect();
+      const mouseX = clientX - rect.left;
+      const mouseY = clientY - rect.top;
+      hero.style.setProperty('--mouse-x', `${mouseX}px`);
+      hero.style.setProperty('--mouse-y', `${mouseY}px`);
+      hero.style.setProperty('--tilt-x', `${(mouseX / rect.width - 0.5) * 6}px`);
+      hero.style.setProperty('--tilt-y', `${(mouseY / rect.height - 0.5) * 4}px`);
+      heroPointerFrame.current = null;
+    });
   };
 
   const pulseHero = () => {

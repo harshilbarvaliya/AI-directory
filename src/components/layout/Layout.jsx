@@ -43,10 +43,15 @@ export default function Layout({ children }) {
       main.style.setProperty('--page-mouse-x', `${clientX - bounds.left}px`);
       main.style.setProperty('--page-mouse-y', `${clientY - bounds.top}px`);
       main.classList.add('site-global-pointer-active');
+      pointerFrame.current = null;
     });
   };
 
   const handlePointerLeave = (event) => {
+    if (pointerFrame.current) {
+      window.cancelAnimationFrame(pointerFrame.current);
+      pointerFrame.current = null;
+    }
     event.currentTarget.classList.remove('site-global-pointer-active');
   };
 

@@ -13,19 +13,44 @@ const groups = [
 
 export default function Footer({ cta = defaultFooterCta }) {
   const ctaContent = { ...defaultFooterCta, ...cta };
+  const pointerFrame = React.useRef(null);
+  const pointerEffectsEnabled = React.useRef(false);
+
+  React.useEffect(() => {
+    const pointerQuery = window.matchMedia('(pointer: fine) and (prefers-reduced-motion: no-preference)');
+    const updatePointerMode = () => { pointerEffectsEnabled.current = pointerQuery.matches; };
+    updatePointerMode();
+    pointerQuery.addEventListener('change', updatePointerMode);
+    return () => {
+      pointerQuery.removeEventListener('change', updatePointerMode);
+      if (pointerFrame.current) window.cancelAnimationFrame(pointerFrame.current);
+    };
+  }, []);
+
   const handlePointerMove = (event) => {
+    if (!pointerEffectsEnabled.current) return;
     const footer = event.currentTarget;
-    const bounds = footer.getBoundingClientRect();
-    const mouseX = `${event.clientX - bounds.left}px`;
-    const mouseY = `${event.clientY - bounds.top}px`;
-    footer.style.setProperty('--footer-mouse-x', mouseX);
-    footer.style.setProperty('--footer-mouse-y', mouseY);
-    footer.style.setProperty('--section-mouse-x', mouseX);
-    footer.style.setProperty('--section-mouse-y', mouseY);
-    footer.classList.add('footer-pointer-active');
+    const clientX = event.clientX;
+    const clientY = event.clientY;
+    if (pointerFrame.current) window.cancelAnimationFrame(pointerFrame.current);
+    pointerFrame.current = window.requestAnimationFrame(() => {
+      const bounds = footer.getBoundingClientRect();
+      const mouseX = `${clientX - bounds.left}px`;
+      const mouseY = `${clientY - bounds.top}px`;
+      footer.style.setProperty('--footer-mouse-x', mouseX);
+      footer.style.setProperty('--footer-mouse-y', mouseY);
+      footer.style.setProperty('--section-mouse-x', mouseX);
+      footer.style.setProperty('--section-mouse-y', mouseY);
+      footer.classList.add('footer-pointer-active');
+      pointerFrame.current = null;
+    });
   };
 
   const handlePointerLeave = (event) => {
+    if (pointerFrame.current) {
+      window.cancelAnimationFrame(pointerFrame.current);
+      pointerFrame.current = null;
+    }
     event.currentTarget.classList.remove('footer-pointer-active');
   };
 
